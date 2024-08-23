@@ -3,9 +3,9 @@
 # proyecto-formatos-02
 ![image](https://github.com/user-attachments/assets/2f5eb2d2-d671-49f3-8fd3-7c1416f8fcb3)
 
-| Integrantes | Columna 2 |
-|-----------|-----------|
-| Aguilar   | Valor 1   |
-| Caxi  | Valor 2   |
-| Chata    | Valor 3   |
+| Integrantes |
+|-----------|
+| Aguilar Victor   | 
+| Caxi Luis Eduardo | 
+| Chata Brant Antony   |
 
