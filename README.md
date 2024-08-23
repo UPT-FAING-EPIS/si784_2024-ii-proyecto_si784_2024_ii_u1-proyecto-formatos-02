@@ -3,7 +3,7 @@
 
 
 <div align="center">
-# proyecto-RUMI
+ PROYECTO RUMI
   
 ![image](https://github.com/user-attachments/assets/2f5eb2d2-d671-49f3-8fd3-7c1416f8fcb3)
   
