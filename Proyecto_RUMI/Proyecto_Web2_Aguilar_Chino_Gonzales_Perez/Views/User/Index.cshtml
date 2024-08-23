@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Proyecto_Web2_Aguilar_Chino_Gonzales_Perez.Models.usuario>
+
+@{ ViewBag.Title = "Gestión de Usuarios"; }
+
+<div class="payment-due">
+    <h1>Usuarios</h1>
+    @Html.ActionLink("Nuevo Usuario", "Create", null, new { @class = "btn btn-edit" })
+</div>
+
+<div class="wrapper">
+    @foreach (var item in Model)
+    {
+        <div class="user-card">
+            <div class="user-info">
+                <span><strong>Nombre:</strong> @Html.DisplayFor(modelItem => item.usuario1)</span>
+                <span><strong>Celular:</strong> @Html.DisplayFor(modelItem => item.celular)</span>
+                <span><strong>Tipo:</strong> @Html.DisplayFor(modelItem => item.tipo_usuario)</span>
+                <span><strong>Saldo:</strong> @Html.DisplayFor(modelItem => item.saldo)</span>
+            </div>
+            <div class="actions">
+                @Html.ActionLink("Editar", "Edit", new { id = item.id_usuario }, new { @class = "btn btn-edit" })
+                @Html.ActionLink("Detalles", "Details", new { id = item.id_usuario }, new { @class = "btn btn-details" })
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.id_usuario }, new { @class = "btn btn-delete" })
+            </div>
+        </div>
+    }
+</div>
+
+

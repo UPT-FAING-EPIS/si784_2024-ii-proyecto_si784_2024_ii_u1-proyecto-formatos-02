@@ -1,0 +1,48 @@
+﻿@model Proyecto_Web2_Aguilar_Chino_Gonzales_Perez.Models.usuario
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Seguro que quiere eliminar a un usuario?</h3>
+<div>
+    <h4>Usuario</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.usuario1)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.usuario1)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.celular)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.celular)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.tipo_usuario)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.tipo_usuario)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.saldo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.saldo)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            @Html.ActionLink("Regresar al Gestionar Usuarios", "Index")
+        </div>
+    }
+</div>

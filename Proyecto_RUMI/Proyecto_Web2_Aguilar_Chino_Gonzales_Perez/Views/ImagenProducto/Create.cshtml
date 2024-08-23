@@ -1,0 +1,38 @@
+﻿@model Proyecto_Web2_Aguilar_Chino_Gonzales_Perez.Models.imagen_producto
+@{
+    ViewBag.Title = Model != null && Model.id_imagen == 0 ? "Añadir Nueva Imagen" : "Editar Imagen";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Create", "ImagenProducto", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(model => model.id_producto)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.url_imagen)
+        @Html.TextBoxFor(model => model.url_imagen/*, new { type = "file" }*/)
+        @Html.ValidationMessageFor(model => model.url_imagen)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.descripcion)
+        @Html.EditorFor(model => model.descripcion)
+        @Html.ValidationMessageFor(model => model.descripcion)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.es_principal)
+        @Html.CheckBoxFor(model => model.es_principal)
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-success">@ViewBag.Title</button>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Volver a la lista", "Index", new { idProducto = Model.id_producto })
+</div>

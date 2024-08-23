@@ -1,0 +1,56 @@
+﻿@model Proyecto_Web2_Aguilar_Chino_Gonzales_Perez.Models.transferencia
+
+@{ ViewBag.Title = "Transferir"; }
+
+@if (TempData["SuccessMessage"] != null)
+{
+<div class="alert alert-success">
+    @TempData["SuccessMessage"]
+</div>}
+
+@if (TempData["ErrorMessage"] != null)
+{
+<div class="alert alert-danger">
+    @TempData["ErrorMessage"]
+</div>}
+
+
+<div class="wrapper">
+    <div class="activitiesDetail">
+        <header>
+            <h1>Chantar</h1>
+            @*<script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>*@
+
+        </header>
+        <main>
+            <dotlottie-player src="https://lottie.host/9e507905-ceba-4adb-89d3-5ecb789b2f7f/ciYAhiBj5d.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></dotlottie-player>
+            <div class="row">
+                <div class="col">
+
+                </div>
+                <div class="col">
+                    <form asp-action="Transferir" method="post">
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" id="IdEmisor" name="IdEmisor" value="@ViewBag.UserId" readonly />
+                        </div>
+                        <br />
+                        <br />
+                        <div class="form-group">
+                            <input placeholder="Identificador" type="text" class="form-control" id="IdReceptor" name="IdReceptor" required />
+                        </div>
+                        <br /><br />
+                        <div class="form-group">
+                            <input placeholder="Monto" type="number" class="form-control" id="Cantidad" name="Cantidad" step="0.01" required />
+                        </div>
+                        <br /><br />
+                        <button type="submit" class="btn btn-primary">Transferir</button>
+
+                    </form>
+                </div>
+                <div class="col">
+
+                </div>
+            </div>
+        </main>
+    </div>
+</div>

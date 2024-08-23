@@ -1,0 +1,26 @@
+﻿@model Proyecto_Web2_Aguilar_Chino_Gonzales_Perez.Models.transferencia
+@{
+    ViewBag.Title = "DetalleTransferencia";
+}
+
+<div class="summary">
+    <header>@Model.id_transferencia</header>
+    <main>
+        <ul>
+            <li>
+                <span>Emisor:</span>
+                <span>@Model.id_emisor</span>
+            </li>
+            <li>
+                <span>Fecha:</span>
+                <span>@Model.fecha</span>
+            </li>
+            <li>
+                <span>Cantidad:</span>
+                <span>@Model.cantidad</span>
+            </li>
+        </ul>        
+    </main>
+</div>
+
+

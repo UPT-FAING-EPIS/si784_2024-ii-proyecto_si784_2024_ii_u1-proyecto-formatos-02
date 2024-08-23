@@ -1,0 +1,253 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Sistemas\\11vo\\web2\\ProyectoWebGitHub\\proyectou2-rumi\\Proyecto_Web2\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{852EB7C7-F418-4B72-9A58-2517A9E96073}|Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez.csproj|d:\\sistemas\\11vo\\web2\\proyectowebgithub\\proyectou2-rumi\\proyecto_web2\\proyecto_web2_aguilar_chino_gonzales_perez\\views\\producto\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{852EB7C7-F418-4B72-9A58-2517A9E96073}|Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez.csproj|solutionrelative:proyecto_web2_aguilar_chino_gonzales_perez\\views\\producto\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{852EB7C7-F418-4B72-9A58-2517A9E96073}|Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez.csproj|D:\\Sistemas\\11vo\\web2\\ProyectoWebGitHub\\proyectou2-rumi\\Proyecto_Web2\\proyecto_web2_aguilar_chino_gonzales_perez\\controllers\\productocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{852EB7C7-F418-4B72-9A58-2517A9E96073}|Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez.csproj|solutionrelative:proyecto_web2_aguilar_chino_gonzales_perez\\controllers\\productocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{852EB7C7-F418-4B72-9A58-2517A9E96073}|Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez.csproj|D:\\Sistemas\\11vo\\web2\\ProyectoWebGitHub\\proyectou2-rumi\\Proyecto_Web2\\proyecto_web2_aguilar_chino_gonzales_perez\\views\\imagenproducto\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{852EB7C7-F418-4B72-9A58-2517A9E96073}|Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez.csproj|solutionrelative:proyecto_web2_aguilar_chino_gonzales_perez\\views\\imagenproducto\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{852EB7C7-F418-4B72-9A58-2517A9E96073}|Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez.csproj|D:\\Sistemas\\11vo\\web2\\ProyectoWebGitHub\\proyectou2-rumi\\Proyecto_Web2\\proyecto_web2_aguilar_chino_gonzales_perez\\views\\imagenproducto\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{852EB7C7-F418-4B72-9A58-2517A9E96073}|Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez.csproj|solutionrelative:proyecto_web2_aguilar_chino_gonzales_perez\\views\\imagenproducto\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{852EB7C7-F418-4B72-9A58-2517A9E96073}|Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez.csproj|D:\\Sistemas\\11vo\\web2\\ProyectoWebGitHub\\proyectou2-rumi\\Proyecto_Web2\\proyecto_web2_aguilar_chino_gonzales_perez\\views\\producto\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{852EB7C7-F418-4B72-9A58-2517A9E96073}|Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez.csproj|solutionrelative:proyecto_web2_aguilar_chino_gonzales_perez\\views\\producto\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{852EB7C7-F418-4B72-9A58-2517A9E96073}|Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez.csproj|D:\\Sistemas\\11vo\\web2\\ProyectoWebGitHub\\proyectou2-rumi\\Proyecto_Web2\\proyecto_web2_aguilar_chino_gonzales_perez\\models\\imagen_producto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{852EB7C7-F418-4B72-9A58-2517A9E96073}|Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez.csproj|solutionrelative:proyecto_web2_aguilar_chino_gonzales_perez\\models\\imagen_producto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{852EB7C7-F418-4B72-9A58-2517A9E96073}|Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez.csproj|D:\\Sistemas\\11vo\\web2\\ProyectoWebGitHub\\proyectou2-rumi\\Proyecto_Web2\\proyecto_web2_aguilar_chino_gonzales_perez\\controllers\\imagenproductocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{852EB7C7-F418-4B72-9A58-2517A9E96073}|Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez.csproj|solutionrelative:proyecto_web2_aguilar_chino_gonzales_perez\\controllers\\imagenproductocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{852EB7C7-F418-4B72-9A58-2517A9E96073}|Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez.csproj|D:\\Sistemas\\11vo\\web2\\ProyectoWebGitHub\\proyectou2-rumi\\Proyecto_Web2\\proyecto_web2_aguilar_chino_gonzales_perez\\views\\imagenproducto\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{852EB7C7-F418-4B72-9A58-2517A9E96073}|Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez.csproj|solutionrelative:proyecto_web2_aguilar_chino_gonzales_perez\\views\\imagenproducto\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{852EB7C7-F418-4B72-9A58-2517A9E96073}|Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez.csproj|D:\\Sistemas\\11vo\\web2\\ProyectoWebGitHub\\proyectou2-rumi\\Proyecto_Web2\\proyecto_web2_aguilar_chino_gonzales_perez\\views\\producto\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{852EB7C7-F418-4B72-9A58-2517A9E96073}|Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez.csproj|solutionrelative:proyecto_web2_aguilar_chino_gonzales_perez\\views\\producto\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{852EB7C7-F418-4B72-9A58-2517A9E96073}|Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez.csproj|D:\\Sistemas\\11vo\\web2\\ProyectoWebGitHub\\proyectou2-rumi\\Proyecto_Web2\\proyecto_web2_aguilar_chino_gonzales_perez\\views\\producto\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{852EB7C7-F418-4B72-9A58-2517A9E96073}|Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez.csproj|solutionrelative:proyecto_web2_aguilar_chino_gonzales_perez\\views\\producto\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{852EB7C7-F418-4B72-9A58-2517A9E96073}|Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez.csproj|D:\\Sistemas\\11vo\\web2\\ProyectoWebGitHub\\proyectou2-rumi\\Proyecto_Web2\\proyecto_web2_aguilar_chino_gonzales_perez\\views\\producto\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{852EB7C7-F418-4B72-9A58-2517A9E96073}|Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez.csproj|solutionrelative:proyecto_web2_aguilar_chino_gonzales_perez\\views\\producto\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{852EB7C7-F418-4B72-9A58-2517A9E96073}|Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez.csproj|D:\\Sistemas\\11vo\\web2\\ProyectoWebGitHub\\proyectou2-rumi\\Proyecto_Web2\\proyecto_web2_aguilar_chino_gonzales_perez\\models\\producto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{852EB7C7-F418-4B72-9A58-2517A9E96073}|Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez.csproj|solutionrelative:proyecto_web2_aguilar_chino_gonzales_perez\\models\\producto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{852EB7C7-F418-4B72-9A58-2517A9E96073}|Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez.csproj|D:\\Sistemas\\11vo\\web2\\ProyectoWebGitHub\\proyectou2-rumi\\Proyecto_Web2\\proyecto_web2_aguilar_chino_gonzales_perez\\views\\imagenproducto\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{852EB7C7-F418-4B72-9A58-2517A9E96073}|Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez.csproj|solutionrelative:proyecto_web2_aguilar_chino_gonzales_perez\\views\\imagenproducto\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{852EB7C7-F418-4B72-9A58-2517A9E96073}|Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez.csproj|D:\\Sistemas\\11vo\\web2\\ProyectoWebGitHub\\proyectou2-rumi\\Proyecto_Web2\\proyecto_web2_aguilar_chino_gonzales_perez\\models\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{852EB7C7-F418-4B72-9A58-2517A9E96073}|Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez.csproj|solutionrelative:proyecto_web2_aguilar_chino_gonzales_perez\\models\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 8,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "D:\\Sistemas\\11vo\\web2\\ProyectoWebGitHub\\proyectou2-rumi\\Proyecto_Web2\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Views\\ImagenProducto\\Edit.cshtml",
+              "RelativeDocumentMoniker": "Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Views\\ImagenProducto\\Edit.cshtml",
+              "ToolTip": "D:\\Sistemas\\11vo\\web2\\ProyectoWebGitHub\\proyectou2-rumi\\Proyecto_Web2\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Views\\ImagenProducto\\Edit.cshtml",
+              "RelativeToolTip": "Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Views\\ImagenProducto\\Edit.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAABkAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-13T09:00:14.055Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\Sistemas\\11vo\\web2\\ProyectoWebGitHub\\proyectou2-rumi\\Proyecto_Web2\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Views\\ImagenProducto\\Index.cshtml",
+              "RelativeDocumentMoniker": "Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Views\\ImagenProducto\\Index.cshtml",
+              "ToolTip": "D:\\Sistemas\\11vo\\web2\\ProyectoWebGitHub\\proyectou2-rumi\\Proyecto_Web2\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Views\\ImagenProducto\\Index.cshtml",
+              "RelativeToolTip": "Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Views\\ImagenProducto\\Index.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-13T08:43:29.593Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "D:\\Sistemas\\11vo\\web2\\ProyectoWebGitHub\\proyectou2-rumi\\Proyecto_Web2\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Views\\Producto\\Create.cshtml",
+              "RelativeDocumentMoniker": "Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Views\\Producto\\Create.cshtml",
+              "ToolTip": "D:\\Sistemas\\11vo\\web2\\ProyectoWebGitHub\\proyectou2-rumi\\Proyecto_Web2\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Views\\Producto\\Create.cshtml",
+              "RelativeToolTip": "Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Views\\Producto\\Create.cshtml",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAwwBQAAABsAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-13T08:12:37.6Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "D:\\Sistemas\\11vo\\web2\\ProyectoWebGitHub\\proyectou2-rumi\\Proyecto_Web2\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Views\\Producto\\Details.cshtml",
+              "RelativeDocumentMoniker": "Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Views\\Producto\\Details.cshtml",
+              "ToolTip": "D:\\Sistemas\\11vo\\web2\\ProyectoWebGitHub\\proyectou2-rumi\\Proyecto_Web2\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Views\\Producto\\Details.cshtml",
+              "RelativeToolTip": "Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Views\\Producto\\Details.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-13T08:10:58.387Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ProductoController.cs",
+              "DocumentMoniker": "D:\\Sistemas\\11vo\\web2\\ProyectoWebGitHub\\proyectou2-rumi\\Proyecto_Web2\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Controllers\\ProductoController.cs",
+              "RelativeDocumentMoniker": "Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Controllers\\ProductoController.cs",
+              "ToolTip": "D:\\Sistemas\\11vo\\web2\\ProyectoWebGitHub\\proyectou2-rumi\\Proyecto_Web2\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Controllers\\ProductoController.cs",
+              "RelativeToolTip": "Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Controllers\\ProductoController.cs",
+              "ViewState": "AQIAAE0AAAAAAAAAAAAAwGEAAAADAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-13T08:10:47.696Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "producto.cs",
+              "DocumentMoniker": "D:\\Sistemas\\11vo\\web2\\ProyectoWebGitHub\\proyectou2-rumi\\Proyecto_Web2\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Models\\producto.cs",
+              "RelativeDocumentMoniker": "Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Models\\producto.cs",
+              "ToolTip": "D:\\Sistemas\\11vo\\web2\\ProyectoWebGitHub\\proyectou2-rumi\\Proyecto_Web2\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Models\\producto.cs",
+              "RelativeToolTip": "Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Models\\producto.cs",
+              "ViewState": "AQIAADEAAAAAAAAAAAA4wBoAAAASAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-13T08:08:23.52Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\Sistemas\\11vo\\web2\\ProyectoWebGitHub\\proyectou2-rumi\\Proyecto_Web2\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Views\\Producto\\Index.cshtml",
+              "RelativeDocumentMoniker": "Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Views\\Producto\\Index.cshtml",
+              "ToolTip": "D:\\Sistemas\\11vo\\web2\\ProyectoWebGitHub\\proyectou2-rumi\\Proyecto_Web2\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Views\\Producto\\Index.cshtml",
+              "RelativeToolTip": "Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Views\\Producto\\Index.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABwAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-13T08:07:57.739Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "LoginViewModel.cs",
+              "DocumentMoniker": "D:\\Sistemas\\11vo\\web2\\ProyectoWebGitHub\\proyectou2-rumi\\Proyecto_Web2\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Models\\LoginViewModel.cs",
+              "RelativeDocumentMoniker": "Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Models\\LoginViewModel.cs",
+              "ToolTip": "D:\\Sistemas\\11vo\\web2\\ProyectoWebGitHub\\proyectou2-rumi\\Proyecto_Web2\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Models\\LoginViewModel.cs",
+              "RelativeToolTip": "Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Models\\LoginViewModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-13T08:04:40.1Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "imagen_producto.cs",
+              "DocumentMoniker": "D:\\Sistemas\\11vo\\web2\\ProyectoWebGitHub\\proyectou2-rumi\\Proyecto_Web2\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Models\\imagen_producto.cs",
+              "RelativeDocumentMoniker": "Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Models\\imagen_producto.cs",
+              "ToolTip": "D:\\Sistemas\\11vo\\web2\\ProyectoWebGitHub\\proyectou2-rumi\\Proyecto_Web2\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Models\\imagen_producto.cs",
+              "RelativeToolTip": "Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Models\\imagen_producto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAAxAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-13T07:55:06.84Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Delete.cshtml",
+              "DocumentMoniker": "D:\\Sistemas\\11vo\\web2\\ProyectoWebGitHub\\proyectou2-rumi\\Proyecto_Web2\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Views\\Producto\\Delete.cshtml",
+              "RelativeDocumentMoniker": "Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Views\\Producto\\Delete.cshtml",
+              "ToolTip": "D:\\Sistemas\\11vo\\web2\\ProyectoWebGitHub\\proyectou2-rumi\\Proyecto_Web2\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Views\\Producto\\Delete.cshtml",
+              "RelativeToolTip": "Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Views\\Producto\\Delete.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB4AAAAGAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-13T08:14:33.236Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "D:\\Sistemas\\11vo\\web2\\ProyectoWebGitHub\\proyectou2-rumi\\Proyecto_Web2\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Views\\Producto\\Edit.cshtml",
+              "RelativeDocumentMoniker": "Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Views\\Producto\\Edit.cshtml",
+              "ToolTip": "D:\\Sistemas\\11vo\\web2\\ProyectoWebGitHub\\proyectou2-rumi\\Proyecto_Web2\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Views\\Producto\\Edit.cshtml",
+              "RelativeToolTip": "Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Views\\Producto\\Edit.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-13T08:13:29.883Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Delete.cshtml",
+              "DocumentMoniker": "D:\\Sistemas\\11vo\\web2\\ProyectoWebGitHub\\proyectou2-rumi\\Proyecto_Web2\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Views\\ImagenProducto\\Delete.cshtml",
+              "RelativeDocumentMoniker": "Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Views\\ImagenProducto\\Delete.cshtml",
+              "ToolTip": "D:\\Sistemas\\11vo\\web2\\ProyectoWebGitHub\\proyectou2-rumi\\Proyecto_Web2\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Views\\ImagenProducto\\Delete.cshtml",
+              "RelativeToolTip": "Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Views\\ImagenProducto\\Delete.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAABZAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-13T09:05:41.702Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ImagenProductoController.cs",
+              "DocumentMoniker": "D:\\Sistemas\\11vo\\web2\\ProyectoWebGitHub\\proyectou2-rumi\\Proyecto_Web2\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Controllers\\ImagenProductoController.cs",
+              "RelativeDocumentMoniker": "Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Controllers\\ImagenProductoController.cs",
+              "ToolTip": "D:\\Sistemas\\11vo\\web2\\ProyectoWebGitHub\\proyectou2-rumi\\Proyecto_Web2\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Controllers\\ImagenProductoController.cs",
+              "RelativeToolTip": "Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Controllers\\ImagenProductoController.cs",
+              "ViewState": "AQIAAA0AAAAAAAAAAAAgwBkAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-13T08:41:15.595Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "D:\\Sistemas\\11vo\\web2\\ProyectoWebGitHub\\proyectou2-rumi\\Proyecto_Web2\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Views\\ImagenProducto\\Create.cshtml",
+              "RelativeDocumentMoniker": "Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Views\\ImagenProducto\\Create.cshtml",
+              "ToolTip": "D:\\Sistemas\\11vo\\web2\\ProyectoWebGitHub\\proyectou2-rumi\\Proyecto_Web2\\Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Views\\ImagenProducto\\Create.cshtml",
+              "RelativeToolTip": "Proyecto_Web2_Aguilar_Chino_Gonzales_Perez\\Views\\ImagenProducto\\Create.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAABOAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-13T08:57:47.134Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

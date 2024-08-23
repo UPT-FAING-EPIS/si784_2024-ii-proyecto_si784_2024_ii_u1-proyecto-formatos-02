@@ -1,0 +1,39 @@
+﻿
+@model IEnumerable<Proyecto_Web2_Aguilar_Chino_Gonzales_Perez.Models.imagen_producto>
+@{
+    ViewBag.Title = "Imágenes del Producto";
+}
+
+<h2>Imágenes del Producto</h2>
+
+<p>
+    @Html.ActionLink("Añadir Nueva Imagen", "Create", new { idProducto = ViewBag.idProducto })
+</p>
+<table class="table">
+    <tr>
+        <th>Imagen</th>
+        <th>Descripción</th>
+        <th>Es Principal</th>
+        <th>Acciones</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <img src="@Url.Content(item.url_imagen)" alt="Imagen" style="width:150px;" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.es_principal)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.id_imagen }) |
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.id_imagen })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,21 @@
+﻿@model Proyecto_Web2_Aguilar_Chino_Gonzales_Perez.Models.imagen_producto
+
+@{
+    ViewBag.Title = "Eliminar Imagen";
+}
+
+<h2>Eliminar Imagen</h2>
+
+<h3>¿Está seguro de querer eliminar esta imagen?</h3>
+<div>
+    <img src="@Url.Content(Model.url_imagen)" alt="Imagen" style="width:150px;" />
+    <hr />
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+            @Html.ActionLink("Cancelar", "Index", new { idProducto = Model.id_producto })
+        </div>
+    }
+</div>

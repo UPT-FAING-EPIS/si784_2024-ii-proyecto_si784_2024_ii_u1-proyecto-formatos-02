@@ -1,0 +1,92 @@
+﻿
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<main>
+    <div class="wrapper">
+        <div class="balance">
+            <header>
+                <div class="date">
+                    <h1>Saldo</h1>
+                    <h2>@ViewBag.FechaActual</h2>
+                </div>
+            </header>
+            <footer>
+                <h1>
+                    <span>®</span>
+                    <span>@ViewBag.Saldo</span>
+                </h1>
+            </footer>
+        </div>
+        <div class="payment-due">
+            <div class="row">
+                <div class="col">
+                    <h1>Chantar</h1>
+
+                </div>
+                <div class="col">
+                    <a class="btn btn-edit" href="@Url.Action("Transferir", "Transferencia")">></a>
+                </div>
+                
+            </div>
+            
+        </div>
+        <div class="activities">
+            <header>
+                <h1>Movimientos</h1>
+            </header>
+            <main>
+                @if (Model != null)
+                {
+                    <ul>
+                        @foreach (var item in Model)
+                        {
+                            <li>
+                                <span>@item.NombreEmisor</span>
+                                <span>@item.Cantidad</span>
+                            </li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <ul>
+                        <li>
+                            
+                            <span>No hay movimientos disponibles.</span>
+                            
+
+                        </li>
+                    </ul>
+
+                }
+            </main>
+            <footer>
+                <form action="@Url.Action("ListarTransferencias", "Home")" method="get">
+                    <button type="submit" class="btn btn-primary">Ver más</button>
+                </form>
+                @*<button>Ver más</button>*@
+            </footer>
+        </div>
+        <div class="summary">
+            <header>
+                <h1>Perfil</h1>
+            </header>
+            <main>
+                <div class="account-number">
+                    <h1>Tu nombre:</h1>
+                    <h1>@ViewBag.Username</h1>
+                </div>
+                <div class="transactions-limit">
+                    <h1>Tu identificador:</h1>
+                    <h1>@ViewBag.UserID</h1>
+                </div>
+            </main>
+        </div>
+    </div>
+    <div>
+        <!-- Enlace a la acción ListarTransferencias en el controlador Home -->
+        @*<a href="@Url.Action("ListarTransferencias", "Home")">Ver Transferencias</a>*@
+    </div>
+</main>

@@ -1,0 +1,41 @@
+﻿@model List<Proyecto_Web2_Aguilar_Chino_Gonzales_Perez.Models.transferencia.TransferenciaResult>
+
+@{
+    ViewBag.Title = "Lista de Transferencias";
+}
+
+<main>
+    <div class="wrapper">
+        <div class="activitiesDetail">
+            <header>
+                <h1>Movimientos</h1>
+            </header>
+            <main>
+                @if (Model != null)
+                {
+                    <ul>
+                       
+                            @foreach (var item in Model)
+                            {
+                        <li>
+                            <span>@item.NombreEmisor</span>
+                            <span> ➤ </span>
+                            <span>@item.NombreReceptor</span>
+                            <span>@item.Cantidad</span>
+                            <sup>@item.Fecha</sup>
+                        </li>
+                            }
+                        
+                    </ul>
+                }
+                else
+                {
+                    <p>No hay movimientos disponibles.</p>
+                }
+            </main>
+            <footer>
+            </footer>
+        </div>
+    </div>
+</main>
+
