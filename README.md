@@ -4,8 +4,4 @@
 
 ## INTEGRANTES
 
-- **Nombre:** Erick Javier Salinas Condori **Codigo:** 2020069046
-- **Nombre:** Erick Javier Salinas Condori **Codigo:** 2020069046
-- **Nombre:** Erick Javier Salinas Condori **Codigo:** 2020069046
-
 Prueba de git flow
