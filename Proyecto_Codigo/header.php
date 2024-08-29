@@ -1,70 +1,59 @@
-<header class="header trans_300">
-	<div class="top_nav">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="top_nav_left text-right" style="line-height: 30px !important;">
-						<i class="fa fa-user" aria-hidden="true"></i>
-						<a href="#" id="mi_cuenta">Mi Cuenta</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="main_nav_container">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12 text-right">
-					<div class="logo_container">
-						<a href="./">
-							<img src="assets/images/logo.png" class="mi_logo">
-						</a>
-					</div>
-					<nav class="navbar">
-						<ul class="navbar_menu">
-							<li><a class="nav-link" href="./">Inicio</a></li>
-							<li><a class="nav-link" href="./">Productos</a></li>
-							<li><a class="nav-link" href="#">contacto</a></li>
-						</ul>
-						<ul class="navbar_user">
-							<li class="checkout">
-								<a href="carrito.php">
-									<img src="assets/images/icon.png" alt="dog" style="width: 20px;">
-									<?php
-									echo iconoCarrito($con);
-									?>
-								</a>
-							</li>
-						</ul>
-						<div class="hamburger_container">
-							<i class="bi bi-list"></i>
-						</div>
-					</nav>
-				</div>
-			</div>
-		</div>
-	</div>
+<?php
+if(isset($message)){
+   foreach($message as $message){
+      echo '
+      <div class="message">
+         <span>'.$message.'</span>
+         <i class="fas fa-times" onclick="this.parentElement.remove();"></i>
+      </div>
+      ';
+   }
+}
+?>
+
+<header class="header">
+
+   <div class="header-1">
+      <div class="flex">
+         <div class="share">
+            <a href="#" class="fab fa-facebook-f"></a>
+            <a href="#" class="fab fa-twitter"></a>
+            <a href="#" class="fab fa-instagram"></a>
+            <a href="#" class="fab fa-linkedin"></a>
+         </div>
+         <p> new <a href="login.php">login</a> | <a href="register.php">register</a> </p>
+      </div>
+   </div>
+
+   <div class="header-2">
+      <div class="flex">
+         <a href="home.php" class="logo">MulcueStore.</a>
+
+         <nav class="navbar">
+            <a href="home.php">home</a>
+            <a href="about.php">about</a>
+            <a href="shop.php">shop</a>
+            <a href="contact.php">contact</a>
+            <a href="orders.php">orders</a>
+         </nav>
+
+         <div class="icons">
+            <div id="menu-btn" class="fas fa-bars"></div>
+            <a href="search_page.php" class="fas fa-search"></a>
+            <div id="user-btn" class="fas fa-user"></div>
+            <?php
+               $select_cart_number = mysqli_query($conn, "SELECT * FROM `cart` WHERE user_id = '$user_id'") or die('query failed');
+               $cart_rows_number = mysqli_num_rows($select_cart_number); 
+            ?>
+            <a href="cart.php"> <i class="fas fa-shopping-cart"></i> <span>(<?php echo $cart_rows_number; ?>)</span> </a>
+         </div>
+
+         <div class="user-box">
+            <p>username : <span><?php echo $_SESSION['user_name']; ?></span></p>
+            <p>email : <span><?php echo $_SESSION['user_email']; ?></span></p>
+            <a href="logout.php" class="delete-btn">logout</a>
+         </div>
+      </div>
+   </div>
+
 </header>
-
-
-<div class="fs_menu_overlay"></div>
-<div class="hamburger_menu">
-	<div class="hamburger_close"><i class="bi bi-x-lg"></i></div>
-	<div class="hamburger_menu_content text-right">
-		<ul class="menu_top_nav">
-			<li class="menu_item has-children">
-				<a href="#">
-					Mi Cuenta
-					<i class="fa fa-angle-down"></i>
-				</a>
-				<ul class="menu_selection">
-					<li><a href="#">Urian Viera</a></li>
-					<li><a href="#">Cerrar Sesión</a></li>
-				</ul>
-			</li>
-			<li class="menu_item"><a href="./">Inicio</a></li>
-			<li class="menu_item"><a href="./">Productos</a></li>
-			<li class="menu_item"><a href="#">Premios</a></li>
-		</ul>
-	</div>
-</div>
