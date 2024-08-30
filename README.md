@@ -4,7 +4,8 @@
 
 Prueba de git flow
 
-Integrantes:
-Mario Flores Ramos
-Erick Salinas Condori
-Fiorela Milady Ticahuanca Cutipa
+# Integrantes:
+
+# Mario Flores Ramos
+# Erick Salinas Condori
+# Fiorela Milady Ticahuanca Cutipa
