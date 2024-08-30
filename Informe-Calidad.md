@@ -10,35 +10,37 @@
 
 **Escuela Profesional de Ingeniería de Sistemas**
 
-**Proyecto *{Nombre de Proyecto}***
+**Proyecto *RUMI***
 
-Curso: *{Nombre de Asignatura}*
+Curso: *Calidad y Pruebas de Software*
 
-Docente: *{Nombre de Docente}*
+Docente: *Ing. Patrick Jose CUADROS QUIROGA*
 
 Integrantes:
 
-***{Apellidos y nombres del estudiante (código universitario)}***
+***CAXI CALANI Luis Eduardo (2018062487)***
+***AGUILAR PINTO Victor Eleazar (2018062487)***
+***CHATA CHOQUE Brant Antony (2018062487)***
 
 **Tacna – Perú**
 
-***{Año}***
+***2024***
 
 **  
 **
 </center>
 <div style="page-break-after: always; visibility: hidden">\pagebreak</div>
 
-Sistema *{Nombre del Sistema}*
+Sistema Web de Recompensas por Participaciones para Jovenes
 
 Informe de Factibilidad
 
-Versión *{1.0}*
+Versión *1.0*
 
 |CONTROL DE VERSIONES||||||
 | :-: | :- | :- | :- | :- | :- |
 |Versión|Hecha por|Revisada por|Aprobada por|Fecha|Motivo|
-|1\.0|MPV|ELV|ARV|10/10/2020|Versión Original|
+|1\.0|MPV|ELV|ARV|10/10/2020|Versión Inicial|
 
 <div style="page-break-after: always; visibility: hidden">\pagebreak</div>
 

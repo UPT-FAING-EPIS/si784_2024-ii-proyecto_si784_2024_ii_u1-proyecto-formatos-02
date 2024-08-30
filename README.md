@@ -7,11 +7,11 @@
   
 ![image](https://github.com/user-attachments/assets/2f5eb2d2-d671-49f3-8fd3-7c1416f8fcb3)
   
-| Integrantes          |
-|----------------------|
-| Aguilar Victor       |
-| Caxi Luis Eduardo    |
-| Chata Brant Antony   |
+| Integrantes                       |
+|-----------------------------------|
+| AGUILAR PINTO Victor Eleazar      |
+| CAXI CALANI Luis Eduardo          |
+| CHATA CHOQUE Brant Antony         |
 
 </div>
 
