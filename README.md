@@ -3,5 +3,5 @@
 # proyecto-formatos-02
 
 ## INTEGRANTES
-  -
-  -
+  - Josue Abraham Emanuel CHAMBILLA ZUÑIGA
+  - Marjiory Grace LLANTAY MACHACA            (2020068951)
