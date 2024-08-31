@@ -5,3 +5,4 @@
 ## INTEGRANTES
 
 1. Mario Flores Ramos
+2. Erick Salinas Condori 
