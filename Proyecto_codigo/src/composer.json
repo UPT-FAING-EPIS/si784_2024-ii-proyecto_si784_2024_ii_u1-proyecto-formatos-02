@@ -1,0 +1,15 @@
+{
+    "name": "asus/src",
+    "autoload": {
+        "psr-4": {
+            "Asus\\Src\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "JosueUPT",
+            "email": "jaechambilla@upt.pe"
+        }
+    ],
+    "require": {}
+}
