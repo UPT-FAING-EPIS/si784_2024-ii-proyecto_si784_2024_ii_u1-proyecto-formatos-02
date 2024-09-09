@@ -1,5 +1,7 @@
 {
     "name": "asus/src",
+    "description": "Proyecto a mejorar",
+    "license": "proprietary",
     "autoload": {
         "psr-4": {
             "Asus\\Src\\": "src/"
