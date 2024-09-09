@@ -2,7 +2,7 @@
     "name": "asus/src",
     "description": "Proyecto a mejorar",
     "license": "proprietary",
-    "type": "project", 
+    "type": "project",
     "autoload": {
         "psr-4": {
             "Asus\\Src\\": "src/"
@@ -17,11 +17,7 @@
     "require": {
         "php": "^8.0"
     },
-    "minimum-stability": "stable",  
-    "scripts": {
-        
-    },
-    "config": {
-        
-    }
+    "minimum-stability": "stable",
+    "scripts": {},
+    "config": {}
 }
