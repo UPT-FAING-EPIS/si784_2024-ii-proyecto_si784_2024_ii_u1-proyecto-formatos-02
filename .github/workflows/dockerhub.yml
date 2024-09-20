@@ -3,7 +3,7 @@ name: CI Workflow
 on:
   push:
     branches:
-      - main
+      - 13-aplicar-sonarqube  # Cambia la rama aquí
 
 jobs:
   build-and-push:
