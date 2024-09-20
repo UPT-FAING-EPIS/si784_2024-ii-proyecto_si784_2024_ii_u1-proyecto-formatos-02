@@ -36,6 +36,7 @@ jobs:
         TAGS_JSON=$(curl -s "https://registry.hub.docker.com/v2/repositories/${{ secrets.DOCKERHUB_USERNAME }}/pgfanpage/tags/")
         LATEST_TAG=$(echo $TAGS_JSON | jq -r '.results | sort_by(.last_updated) | last | .name')
         echo "LATEST_TAG=${LATEST_TAG}" >> $GITHUB_ENV
+        echo "Latest tag found: ${LATEST_TAG}"
 
     - name: Create GitHub Release
       id: create_release
