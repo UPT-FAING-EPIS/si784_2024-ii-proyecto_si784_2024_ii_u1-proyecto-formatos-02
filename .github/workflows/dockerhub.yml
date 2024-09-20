@@ -33,8 +33,11 @@ jobs:
     - name: Get the latest Docker image tag
       id: get_latest_tag
       run: |
-        docker pull ${{ secrets.DOCKERHUB_USERNAME }}/pgfanpage
-        echo "LATEST_TAG=$(docker images --filter=reference='${{ secrets.DOCKERHUB_USERNAME }}/pgfanpage:*' --format '{{.Tag}}' | sort -V | tail -n 1)" >> $GITHUB_ENV
+        echo "Pulling the latest Docker image..."
+        # Intenta obtener la última etiqueta de Docker Hub
+        LATEST_TAG=$(curl -s "https://registry.hub.docker.com/v2/repositories/${{ secrets.DOCKERHUB_USERNAME }}/pgfanpage/tags/" | jq -r '.results | map(.name) | sort | last')
+        echo "LATEST_TAG=${LATEST_TAG}" >> $GITHUB_ENV
+        echo "Latest tag found: ${LATEST_TAG}"
 
     - name: Create GitHub Release
       id: create_release
