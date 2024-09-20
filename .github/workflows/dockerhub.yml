@@ -33,14 +33,9 @@ jobs:
     - name: Get the latest Docker image tag
       id: get_latest_tag
       run: |
-        # Obtener el JSON con los tags y sus detalles
         TAGS_JSON=$(curl -s "https://registry.hub.docker.com/v2/repositories/${{ secrets.DOCKERHUB_USERNAME }}/pgfanpage/tags/")
-        
-        # Extraer la etiqueta con la fecha de push más reciente
         LATEST_TAG=$(echo $TAGS_JSON | jq -r '.results | sort_by(.last_updated) | last | .name')
-        
         echo "LATEST_TAG=${LATEST_TAG}" >> $GITHUB_ENV
-        echo "Latest tag found: ${LATEST_TAG}"
 
     - name: Create GitHub Release
       id: create_release
