@@ -3,7 +3,7 @@ name: CI Workflow
 on:
   push:
     branches:
-      - 13-aplicar-sonarqube
+      - main
 
 jobs:
   build-and-push:
@@ -28,7 +28,7 @@ jobs:
 
   create-release:
     runs-on: ubuntu-latest
-    needs: build-and-push  # Asegúrate de que este job se ejecute después del anterior
+    needs: build-and-push
     steps:
     - name: Get the latest Docker image tag
       id: get_latest_tag
@@ -42,9 +42,21 @@ jobs:
       id: create_release
       uses: softprops/action-gh-release@v1
       with:
-        tag_name: ${{ env.LATEST_TAG }}  # Usa la etiqueta obtenida
+        tag_name: ${{ env.LATEST_TAG }}
         release_name: Release ${{ env.LATEST_TAG }}
         draft: false
         prerelease: false
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build-and-push  # Asegúrate de que este job se ejecute después del anterior
+    steps:
+    - name: Log in to DockerHub
+      run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+
+    - name: Deploy the latest Docker image
+      run: |
+        docker pull ${{ secrets.DOCKERHUB_USERNAME }}/pgfanpage:${{ env.VERSION }}
+        docker run -d -p 80:80 ${{ secrets.DOCKERHUB_USERNAME }}/pgfanpage:${{ env.VERSION }}
