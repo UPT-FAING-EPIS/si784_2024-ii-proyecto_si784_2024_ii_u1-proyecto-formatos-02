@@ -37,5 +37,5 @@ class LoginTest extends TestCase {
     protected function tearDown(): void {
         $this->conn->close();
     }
-}
+} 
 ?>
