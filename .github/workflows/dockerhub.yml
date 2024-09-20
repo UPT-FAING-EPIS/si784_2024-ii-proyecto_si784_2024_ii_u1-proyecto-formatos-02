@@ -26,13 +26,4 @@ jobs:
     - name: Push Docker image
       run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/pgfanpage:${{ env.VERSION }}
 
-    - name: Create GitHub Release
-      id: create_release
-      uses: softprops/action-gh-release@v1
-      with:
-        tag_name: ${{ env.VERSION }}
-        release_name: Release ${{ env.VERSION }}
-        draft: false
-        prerelease: false
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
