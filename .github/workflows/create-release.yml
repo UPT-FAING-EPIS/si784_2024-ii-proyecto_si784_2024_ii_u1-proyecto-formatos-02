@@ -1,0 +1,29 @@
+name: Create Release
+
+on:
+  push:
+    tags:
+      - '1.0.*'  # Ajusta según tu esquema de versionado
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Get the last Docker tag from Docker Hub
+      id: get_latest_tag
+      run: |
+        echo "LATEST_TAG=$(docker pull ${{ secrets.DOCKERHUB_USERNAME }}/pgfanpage | grep -oP '(?<=:)[^ ]+$' | tail -n 1)" >> $GITHUB_ENV
+
+    - name: Create GitHub Release
+      id: create_release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ env.LATEST_TAG }}  # Usa la etiqueta que obtuvimos
+        release_name: Release ${{ env.LATEST_TAG }}
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
