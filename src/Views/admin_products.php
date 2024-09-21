@@ -1,6 +1,6 @@
 <?php
 
-include 'config.php';
+include '../config.php';
 
 session_start();
 
@@ -17,7 +17,7 @@ if(isset($_POST['add_product'])){
    $image = $_FILES['image']['name'];
    $image_size = $_FILES['image']['size'];
    $image_tmp_name = $_FILES['image']['tmp_name'];
-   $image_folder = 'uploaded_img/'.$image;
+   $image_folder = '../uploaded_img/'.$image;
 
    $select_product_name = mysqli_query($conn, "SELECT name FROM `products` WHERE name = '$name'") or die('query failed');
 
@@ -44,7 +44,7 @@ if(isset($_GET['delete'])){ /*eliminar pelis */
    $delete_id = $_GET['delete'];
    $delete_image_query = mysqli_query($conn, "SELECT image FROM `products` WHERE id = '$delete_id'") or die('query failed');
    $fetch_delete_image = mysqli_fetch_assoc($delete_image_query);
-   unlink('uploaded_img/'.$fetch_delete_image['image']);
+   unlink('../uploaded_img/'.$fetch_delete_image['image']);
    mysqli_query($conn, "DELETE FROM `products` WHERE id = '$delete_id'") or die('query failed');
    header('location:admin_products.php');
 }
@@ -60,7 +60,7 @@ if(isset($_POST['update_product'])){ /*mod btn of edit update and delte - deja m
    $update_image = $_FILES['update_image']['name'];
    $update_image_tmp_name = $_FILES['update_image']['tmp_name'];
    $update_image_size = $_FILES['update_image']['size'];
-   $update_folder = 'uploaded_img/'.$update_image; /*mod image,folder in mulcue*/
+   $update_folder = '../uploaded_img/'.$update_image; /*mod image,folder in mulcue*/
    $update_old_image = $_POST['update_old_image'];
 
    if(!empty($update_image)){
@@ -69,7 +69,7 @@ if(isset($_POST['update_product'])){ /*mod btn of edit update and delte - deja m
       }else{
          mysqli_query($conn, "UPDATE `products` SET image = '$update_image' WHERE id = '$update_p_id'") or die('query failed');
          move_uploaded_file($update_image_tmp_name, $update_folder);
-         unlink('uploaded_img/'.$update_old_image); /*valide false or true the query */
+         unlink('../uploaded_img/'.$update_old_image); /*valide false or true the query */
       }
    }
 
@@ -93,7 +93,7 @@ if(isset($_POST['update_product'])){ /*mod btn of edit update and delte - deja m
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
    <!-- custom admin css file link  -->
-   <link rel="stylesheet" href="css/admin_style.css"> <!--link donde se hara la mod-->
+   <link rel="stylesheet" href="../css/admin_style.css"> <!--link donde se hara la mod-->
 
 </head>
 <body>
@@ -130,7 +130,7 @@ if(isset($_POST['update_product'])){ /*mod btn of edit update and delte - deja m
             while($fetch_products = mysqli_fetch_assoc($select_products)){
       ?>
       <div class="box"> <!--salen img d las pelis -->
-         <img src="uploaded_img/<?php echo $fetch_products['image']; ?>" alt="">
+         <img src="../uploaded_img/<?php echo $fetch_products['image']; ?>" alt="">
          <div class="name"><?php echo $fetch_products['name']; ?></div>
          <div class="price">S/. <?php echo $fetch_products['price']; ?> Soles</div>
          <a href="admin_products.php?update=<?php echo $fetch_products['id']; ?>" class="option-btn">actualizar</a>
@@ -158,7 +158,7 @@ if(isset($_POST['update_product'])){ /*mod btn of edit update and delte - deja m
    <form action="" method="post" enctype="multipart/form-data">
       <input type="hidden" name="update_p_id" value="<?php echo $fetch_update['id']; ?>">
       <input type="hidden" name="update_old_image" value="<?php echo $fetch_update['image']; ?>">
-      <img src="uploaded_img/<?php echo $fetch_update['image']; ?>" alt="">
+      <img src="../uploaded_img/<?php echo $fetch_update['image']; ?>" alt="">
       <input type="text" name="update_name" value="<?php echo $fetch_update['name']; ?>" class="box" required placeholder="enter product name">
       <input type="number" name="update_price" value="<?php echo $fetch_update['price']; ?>" min="0" class="box" required placeholder="enter product price">
       <input type="file" class="box" name="update_image" accept="image/jpg, image/jpeg, image/png">
@@ -182,7 +182,7 @@ if(isset($_POST['update_product'])){ /*mod btn of edit update and delte - deja m
 
 
 <!-- custom admin js file link  -->
-<script src="js/admin_script.js"></script>
+<script src="../js/admin_script.js"></script>
 
 </body>
 </html>

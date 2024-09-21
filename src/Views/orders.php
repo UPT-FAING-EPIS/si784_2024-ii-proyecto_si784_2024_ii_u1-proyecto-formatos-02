@@ -1,6 +1,6 @@
 <?php
 
-include 'config.php';
+include '../config.php';
 
 session_start();
 
@@ -20,13 +20,13 @@ if(!isset($user_id)){
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>orders</title>
 
-   <link rel="icon" id="png" href="images/icon2.png">
+   <link rel="icon" id="png" href="../images/icon2.png">
 
    <!-- font awesome cdn link  -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
    <!-- custom css file link  -->
-   <link rel="stylesheet" href="css/style.css">
+   <link rel="stylesheet" href="../css/style.css">
 
 </head>
 <body>
@@ -57,7 +57,7 @@ if(!isset($user_id)){
          <p> address : <span><?php echo $fetch_orders['address']; ?></span> </p>
          <p> payment method : <span><?php echo $fetch_orders['method']; ?></span> </p>
          <p> your orders : <span><?php echo $fetch_orders['total_products']; ?></span> </p>
-         <p> total price : <span>$<?php echo $fetch_orders['total_price']; ?>/-</span> </p>
+         <p> total price : <span>S/. <?php echo $fetch_orders['total_price']; ?> Soles</span> </p>
          <p> payment status : <span style="color:<?php if($fetch_orders['payment_status'] == 'pending'){ echo 'red'; }else{ echo 'green'; } ?>;"><?php echo $fetch_orders['payment_status']; ?></span> </p>
          </div>
       <?php
@@ -80,7 +80,7 @@ if(!isset($user_id)){
 <?php include 'footer.php'; ?>
 
 <!-- custom js file link  -->
-<script src="js/script.js"></script>
+<script src="../js/script.js"></script>
 
 </body>
 </html>
