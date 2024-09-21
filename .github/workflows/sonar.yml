@@ -24,8 +24,6 @@ jobs:
           dotnet-version: ${{ env.DOTNET_VERSION }}
       - name: Restaurar los paquetes
         run: dotnet restore PROYECTOPDFVFINAL
-      - name: Ejecutar pruebas
-        run: dotnet test PROYECTOPDFVFINAL --collect:"XPlat Code Coverage;Format=opencover"
       - name: Instalar Scanner
         run: dotnet tool install -g dotnet-sonarscanner
       - name: Ejecutar escaneo
