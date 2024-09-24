@@ -29,25 +29,12 @@ jobs:
           -Dsonar.issuesReport.html.enable=true \
           -Dsonar.issuesReport.html.location=/usr/src/reports/sonar-report.html || echo "Sonar scan failed"
 
-      - name: Check SonarCloud Scanner output
-        run: |
-          echo "Sonar scan output:"
-          # Reemplaza esto con la ruta correcta si hay logs
-          echo "No logs available"
-
       - name: List files in reports directory
         run: ls -la reports/
 
       - name: Wait for SonarCloud analysis to finish
         run: |
-          sleep 30  # Esperar a que el análisis se complete
-
-      - name: Fetch Vulnerabilities
-        run: |
-          echo "## Vulnerabilities Detected"
-          echo "| Message | Severity | Component | Line | Status |"
-          curl -u "${{ secrets.SONAR_TOKEN }}: " "https://sonarcloud.io/api/issues/search?componentKeys=pyfanpage&types=VULNERABILITY" \
-          | jq -r '.issues[] | "| \(.message) | \(.severity) | \(.component) | \(.line) | \(.status) |"'
+          sleep 60  # Aumentar el tiempo de espera
 
       - name: Commit and Push HTML Report
         run: |
@@ -56,7 +43,7 @@ jobs:
             git config --global user.email "jaechambilla@upt.pe"
             git add reports/sonar-report.html
             git commit -m "Add SonarCloud report"
-            git push origin HEAD:${{ github.ref }}  # Asegúrate de hacer push a la rama correcta
+            git push origin HEAD:${{ github.ref }}
           else
             echo "No report found, skipping commit."
           fi
