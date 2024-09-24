@@ -41,4 +41,5 @@ jobs:
           done
 
       - name: Output Issues Link
-        run: echo "See all issues at: https://sonarcloud.io/project/issues?id=${{ env.SONAR_PROJECT }}"
+        run: |
+          echo "See all issues at: https://sonarcloud.io/project/issues?id=${{ env.SONAR_PROJECT }}"
