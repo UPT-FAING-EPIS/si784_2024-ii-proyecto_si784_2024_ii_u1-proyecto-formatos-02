@@ -32,13 +32,13 @@ jobs:
           mv sonar-scanner-5.0.1.3006-linux sonar-scanner
           echo "PATH=$PATH:$(pwd)/sonar-scanner/bin" >> $GITHUB_ENV
 
-        - name: Run SonarScanner
-          run: |
-            sonar-scanner -Dsonar.projectKey=${{ env.SONAR_PROJECT }} \
-                          -Dsonar.organization=${{ env.SONAR_ORG }} \
-                          -Dsonar.sources=src,View \
-                          -Dsonar.host.url=https://sonarcloud.io \
-                          -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+      - name: Run SonarScanner
+        run: |
+          sonar-scanner -Dsonar.projectKey=${{ env.SONAR_PROJECT }} \
+                        -Dsonar.organization=${{ env.SONAR_ORG }} \
+                        -Dsonar.sources=src,View \
+                        -Dsonar.host.url=https://sonarcloud.io \
+                        -Dsonar.login=${{ secrets.SONAR_TOKEN }}
 
       - name: Create report directory
         run: |
