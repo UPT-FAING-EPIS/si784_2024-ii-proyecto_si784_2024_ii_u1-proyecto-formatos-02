@@ -26,19 +26,18 @@ jobs:
           -Dsonar.projectKey=${{ env.SONAR_PROJECT }} \
           -Dsonar.organization=${{ env.SONAR_ORG }} \
           -Dsonar.sources=src \
-          -Dsonar.host.url=https://sonarcloud.io \
-          -Dsonar.branch.name=13-aplicar-sonarqube
+          -Dsonar.host.url=https://sonarcloud.io
 
       - name: Wait for SonarCloud analysis to finish
         run: |
-          sleep 30  # Esperar a que el análisis se complete
+          sleep 60  # Esperar a que el análisis se complete
 
       - name: Fetch Vulnerabilities
         run: |
           echo "## Vulnerabilities Detected"
           echo "| Message | Severity | Component | Line | Status |"
           echo "|---------|----------|-----------|------|--------|"
-          curl -u "${{ secrets.SONAR_TOKEN }}: " "https://sonarcloud.io/api/issues/search?componentKeys=${{ env.SONAR_PROJECT }}&types=VULNERABILITY" \
+          curl -u "${{ secrets.SONAR_TOKEN }}: " "https://sonarcloud.io/api/issues/search?componentKeys=${{ env.SONAR_PROJECT }}&types=VULNERABILITY" -v \
           | jq -r '.issues[] | "| \(.message) | \(.severity) | \(.component) | \(.line) | \(.status) |"'
 
       - name: Fetch Code Smells
@@ -46,5 +45,5 @@ jobs:
           echo "## Code Smells Detected"
           echo "| Message | Severity | Component | Line | Status |"
           echo "|---------|----------|-----------|------|--------|"
-          curl -u "${{ secrets.SONAR_TOKEN }}: " "https://sonarcloud.io/api/issues/search?componentKeys=${{ env.SONAR_PROJECT }}&types=CODE_SMELL" \
+          curl -u "${{ secrets.SONAR_TOKEN }}: " "https://sonarcloud.io/api/issues/search?componentKeys=${{ env.SONAR_PROJECT }}&types=CODE_SMELL" -v \
           | jq -r '.issues[] | "| \(.message) | \(.severity) | \(.component) | \(.line) | \(.status) |"'
