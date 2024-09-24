@@ -59,8 +59,20 @@ jobs:
         run: |
           zip sonar_report.zip sonar_report.html
 
-      - name: Subir reporte como artefacto
-        uses: actions/upload-artifact@v3
+      - name: Crear un nuevo Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
         with:
-          name: sonar-report
-          path: sonar_report.zip
+          tag_name: v1.0.0  # Cambia esto a la versión que desees
+          release_name: "Release de SonarCloud"
+          body: "Reporte de análisis de código de SonarCloud"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Subir el archivo ZIP al Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v1.0.0
+          files: sonar_report.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
