@@ -26,14 +26,19 @@ jobs:
           -Dsonar.sources=. \
           -Dsonar.host.url=https://sonarcloud.io \
           -Dsonar.issuesReport.html.enable=true \
-          -Dsonar.issuesReport.html.location=./reports/sonar-report.html  # Guardar el informe en esta ubicación
+          -Dsonar.issuesReport.html.location=./reports/sonar-report.html
+
+      - name: Check SonarCloud Scanner output
+        run: |
+          # Verificar la salida del escáner aquí
+          echo "Checking output..."
+
+      - name: List files in reports directory
+        run: ls -la reports/
 
       - name: Wait for SonarCloud analysis to finish
         run: |
           sleep 30  # Esperar a que el análisis se complete
-
-      - name: List files
-        run: ls -la  # Listar archivos para verificar si se generó el informe
 
       - name: Fetch Vulnerabilities
         run: |
@@ -45,8 +50,8 @@ jobs:
       - name: Commit and Push HTML Report
         run: |
           git config --global user.name "JosueUPT"
-          git config --global user.email "jaechambilla@upt.pe"
-          git add reports/sonar-report.html  # Actualizar la ruta del informe
+          git config --global user.email "actions@github.com"
+          git add reports/sonar-report.html
           git commit -m "Add SonarCloud report"
           git push
         env:
