@@ -37,7 +37,7 @@ jobs:
           sonar-scanner \
             -Dsonar.projectKey=${{ env.SONAR_PROJECT }} \
             -Dsonar.organization=${{ env.SONAR_ORG }} \
-            -Dsonar.sources=src,views \
+            -Dsonar.sources=src,View \  # Usa 'View' con 'V' mayúscula
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.login=${{ secrets.SONAR_TOKEN }}
 
