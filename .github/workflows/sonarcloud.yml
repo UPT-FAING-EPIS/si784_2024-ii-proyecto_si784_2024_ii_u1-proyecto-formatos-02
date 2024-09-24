@@ -1,21 +1,17 @@
-name: Tarea Automatizada de análisis de código
-
-env:
-  SONAR_ORG: 'pyfanpage'
-  SONAR_PROJECT: 'pyfanpage'
+name: SonarCloud Analysis
 
 on:
   push:
-    branches: ["13-aplicar-sonarqube"]
-  workflow_dispatch:
+    branches:
+      - main  # Cambia esto según tu rama principal
 
 jobs:
-  sonar_scan:
-    name: SonarQube Scan
-    runs-on: ubuntu-latest
-
+  sonarcloud:
+    docker:
+      image: "sonarsource/sonar-scanner-cli"
+    
     steps:
-      - name: Checkout del repositorio
+      - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Build and Run SonarCloud Scanner
@@ -23,27 +19,15 @@ jobs:
           docker run --rm -e SONAR_TOKEN=${{ secrets.SONAR_TOKEN }} \
           -v ${GITHUB_WORKSPACE}:/usr/src \
           sonarsource/sonar-scanner-cli \
-          -Dsonar.projectKey=${{ env.SONAR_PROJECT }} \
-          -Dsonar.organization=${{ env.SONAR_ORG }} \
-          -Dsonar.sources=src \
+          -Dsonar.projectKey=pyfanpage \
+          -Dsonar.organization=tu_organizacion \
+          -Dsonar.sources=. \
           -Dsonar.host.url=https://sonarcloud.io
 
       - name: Wait for SonarCloud analysis to finish
         run: |
           sleep 60  # Esperar a que el análisis se complete
 
-      - name: Fetch Vulnerabilities
+      - name: Display SonarCloud Report
         run: |
-          echo "## Vulnerabilities Detected"
-          echo "| Message | Severity | Component | Line | Status |"
-          echo "|---------|----------|-----------|------|--------|"
-          curl -u "${{ secrets.SONAR_TOKEN }}: " "https://sonarcloud.io/api/issues/search?componentKeys=${{ env.SONAR_PROJECT }}&types=VULNERABILITY" -v \
-          | jq -r '.issues[] | "| \(.message) | \(.severity) | \(.component) | \(.line) | \(.status) |"'
-
-      - name: Fetch Code Smells
-        run: |
-          echo "## Code Smells Detected"
-          echo "| Message | Severity | Component | Line | Status |"
-          echo "|---------|----------|-----------|------|--------|"
-          curl -u "${{ secrets.SONAR_TOKEN }}: " "https://sonarcloud.io/api/issues/search?componentKeys=${{ env.SONAR_PROJECT }}&types=CODE_SMELL" -v \
-          | jq -r '.issues[] | "| \(.message) | \(.severity) | \(.component) | \(.line) | \(.status) |"'
+          echo "SonarCloud Report: https://sonarcloud.io/project/overview?id=pyfanpage"
