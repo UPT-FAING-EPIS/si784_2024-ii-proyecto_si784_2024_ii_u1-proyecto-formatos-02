@@ -28,3 +28,22 @@ jobs:
           -Dsonar.organization=${{ env.SONAR_ORG }} \
           -Dsonar.sources=src \
           -Dsonar.host.url=https://sonarcloud.io
+
+      - name: Obtener estado del análisis
+        id: sonar_status
+        run: |
+          ANALYSIS_JSON=$(curl -s -u ${{ secrets.SONAR_TOKEN }}: "https://sonarcloud.io/api/qualitygates/project_status?projectKey=${{ env.SONAR_PROJECT }}")
+          echo "ANALYSIS_JSON=${ANALYSIS_JSON}" >> $GITHUB_ENV
+
+      - name: Generar reporte HTML
+        run: |
+          echo "<html><head><title>Reporte de SonarCloud</title></head><body>" > sonar_report.html
+          echo "<h1>Reporte de Calidad para ${{ env.SONAR_PROJECT }}</h1>" >> sonar_report.html
+          echo "<p>Estado: $(echo ${{ env.ANALYSIS_JSON }} | jq -r '.status')</p>" >> sonar_report.html
+          echo "</body></html>" >> sonar_report.html
+
+      - name: Subir reporte como artefacto
+        uses: actions/upload-artifact@v3
+        with:
+          name: sonar-report
+          path: sonar_report.html
