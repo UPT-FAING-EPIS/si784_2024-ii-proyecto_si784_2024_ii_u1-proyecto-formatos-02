@@ -35,7 +35,6 @@ jobs:
         run: |
           ANALYSIS_JSON=$(curl -s -u ${{ secrets.SONAR_TOKEN }}: "https://sonarcloud.io/api/qualitygates/project_status?projectKey=${{ env.SONAR_PROJECT }}")
           echo "ANALYSIS_JSON=${ANALYSIS_JSON}" >> $GITHUB_ENV
-          echo "Respuesta de la API: $ANALYSIS_JSON"
           if [ -z "$ANALYSIS_JSON" ]; then
             echo "Error: ANALYSIS_JSON está vacío."
             exit 1
@@ -46,7 +45,6 @@ jobs:
         run: |
           ISSUES_JSON=$(curl -s -u ${{ secrets.SONAR_TOKEN }}: "https://sonarcloud.io/api/issues/search?componentKeys=${{ env.SONAR_PROJECT }}")
           echo "ISSUES_JSON=${ISSUES_JSON}" >> $GITHUB_ENV
-          echo "Respuesta de la API de problemas: $ISSUES_JSON"
           if [ -z "$ISSUES_JSON" ]; then
             echo "Error: ISSUES_JSON está vacío."
             exit 1
@@ -57,11 +55,9 @@ jobs:
           echo "<html><head><title>Reporte de SonarCloud</title></head><body>" > sonar_report.html
           echo "<h1>Reporte de Calidad para ${{ env.SONAR_PROJECT }} (Versión: ${{ env.VERSION }})</h1>" >> sonar_report.html
           
-          # Obtener estado
           STATUS=$(echo "$ANALYSIS_JSON" | jq -r '.projectStatus.status')
           echo "<p>Estado: $STATUS</p>" >> sonar_report.html
           
-          # Agregar condiciones al reporte
           echo "<h2>Condiciones de Calidad:</h2><ul>" >> sonar_report.html
           echo "$ANALYSIS_JSON" | jq -c '.projectStatus.conditions[]' | while read -r condition; do
             METRIC=$(echo "$condition" | jq -r '.metricKey')
@@ -70,7 +66,6 @@ jobs:
           done
           echo "</ul>" >> sonar_report.html
           
-          # Agregar problemas al reporte en una tabla
           echo "<h2>Problemas Encontrados:</h2>" >> sonar_report.html
           echo "<table border='1'><tr><th>Severidad</th><th>Mensaje</th><th>Archivo</th><th>Línea</th><th>Tipo de Vulnerabilidad</th></tr>" >> sonar_report.html
           echo "$ISSUES_JSON" | jq -c '.issues[]' | while read -r issue; do
