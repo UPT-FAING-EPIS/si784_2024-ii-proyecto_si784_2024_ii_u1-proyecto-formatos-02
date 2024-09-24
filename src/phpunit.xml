@@ -11,7 +11,7 @@
         </whitelist>
     </filter>
 
-    <coverage processUncoveredFiles="true">
+    <coverage>
         <include>
             <directory>../src</directory>
         </include>
