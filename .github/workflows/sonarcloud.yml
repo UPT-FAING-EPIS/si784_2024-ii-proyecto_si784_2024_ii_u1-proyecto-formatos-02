@@ -1,7 +1,7 @@
 name: Tarea Automatizada de ejecución de pruebas
 
 env:
-  PHP_VERSION: '8.1'
+  PHP_VERSION: '8.2'
   SONAR_ORG: 'pyfanpage'
   SONAR_PROJECT: 'pyfanpage'
 
