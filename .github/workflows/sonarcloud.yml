@@ -34,50 +34,61 @@ jobs:
         run: |
           ANALYSIS_JSON=$(curl -s -u ${{ secrets.SONAR_TOKEN }}: "https://sonarcloud.io/api/qualitygates/project_status?projectKey=${{ env.SONAR_PROJECT }}")
           echo "ANALYSIS_JSON=${ANALYSIS_JSON}" >> $GITHUB_ENV
+          echo "Respuesta de la API: $ANALYSIS_JSON"  # Mostrar respuesta en logs
+          if [ -z "$ANALYSIS_JSON" ]; then
+            echo "Error: ANALYSIS_JSON está vacío."
+            exit 1
+          fi
 
       - name: Obtener problemas del análisis
         id: sonar_issues
         run: |
           ISSUES_JSON=$(curl -s -u ${{ secrets.SONAR_TOKEN }}: "https://sonarcloud.io/api/issues/search?componentKeys=${{ env.SONAR_PROJECT }}")
           echo "ISSUES_JSON=${ISSUES_JSON}" >> $GITHUB_ENV
+          echo "Respuesta de la API de problemas: $ISSUES_JSON"  # Mostrar respuesta en logs
+          if [ -z "$ISSUES_JSON" ]; then
+            echo "Error: ISSUES_JSON está vacío."
+            exit 1
+          fi
 
       - name: Generar reporte HTML
         run: |
           echo "<html><head><title>Reporte de SonarCloud</title></head><body>" > sonar_report.html
           echo "<h1>Reporte de Calidad para ${{ env.SONAR_PROJECT }}</h1>" >> sonar_report.html
+          
+          # Obtener estado
           STATUS=$(echo "$ANALYSIS_JSON" | jq -r '.projectStatus.status')
           echo "<p>Estado: $STATUS</p>" >> sonar_report.html
+          
+          # Agregar condiciones al reporte
+          echo "<h2>Condiciones de Calidad:</h2><ul>" >> sonar_report.html
+          echo "$ANALYSIS_JSON" | jq -c '.projectStatus.conditions[]' | while read -r condition; do
+            METRIC=$(echo "$condition" | jq -r '.metricKey')
+            CONDITION_STATUS=$(echo "$condition" | jq -r '.status')
+            echo "<li>$METRIC: $CONDITION_STATUS</li>" >> sonar_report.html
+          done
+          echo "</ul>" >> sonar_report.html
+          
+          # Agregar problemas al reporte
           echo "<h2>Problemas Encontrados:</h2><ul>" >> sonar_report.html
           echo "$ISSUES_JSON" | jq -c '.issues[]' | while read -r issue; do
             ISSUE_MSG=$(echo "$issue" | jq -r '.message')
             ISSUE_SEVERITY=$(echo "$issue" | jq -r '.severity')
-            ISSUE_COMPONENT=$(echo "$issue" | jq -r '.component')
-            ISSUE_LINE=$(echo "$issue" | jq -r '.line')
-
-            # Añadir título y ubicación
-            echo "<li>[$ISSUE_SEVERITY] $ISSUE_MSG <br> <strong>Archivo:</strong> $ISSUE_COMPONENT, <strong>Línea:</strong> $ISSUE_LINE</li>" >> sonar_report.html
+            echo "<li>[$ISSUE_SEVERITY] $ISSUE_MSG</li>" >> sonar_report.html
           done
-          echo "</ul></body></html>" >> sonar_report.html
+          echo "</ul>" >> sonar_report.html
+          
+          echo "</body></html>" >> sonar_report.html
 
+      - name: Crear ZIP del reporte
+        run: zip sonar_report.zip sonar_report.html
 
-      - name: Comprimir el reporte
-        run: |
-          zip sonar_report.zip sonar_report.html
+      - name: Listar archivos
+        run: ls -la
 
-      - name: Crear un nuevo Release
-        id: create_release
+      - name: Subir a GitHub Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: v2.0.0  # Cambia esto a la versión que desees
-          release_name: "Release de SonarCloud"
-          body: "Reporte de análisis de código de SonarCloud"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Subir el archivo ZIP al Release
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: v1.0.0
+          tag_name: v2.0.0
           files: sonar_report.zip
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
