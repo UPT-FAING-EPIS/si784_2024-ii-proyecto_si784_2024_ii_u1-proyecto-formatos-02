@@ -34,6 +34,7 @@ jobs:
         run: |
           ANALYSIS_JSON=$(curl -s -u ${{ secrets.SONAR_TOKEN }}: "https://sonarcloud.io/api/qualitygates/project_status?projectKey=${{ env.SONAR_PROJECT }}")
           echo "ANALYSIS_JSON=${ANALYSIS_JSON}" >> $GITHUB_ENV
+          echo "Respuesta de la API: $ANALYSIS_JSON"  # Mostrar respuesta en logs
 
       - name: Generar reporte HTML
         run: |
