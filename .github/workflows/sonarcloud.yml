@@ -12,6 +12,9 @@ jobs:
         with:
           php-version: '8.1'
 
+      - name: Create reports directory
+        run: mkdir -p reports
+
       - name: Build and Run SonarCloud Scanner
         run: |
           docker run --rm -e SONAR_TOKEN=${{ secrets.SONAR_TOKEN }} \
@@ -23,11 +26,14 @@ jobs:
           -Dsonar.sources=. \
           -Dsonar.host.url=https://sonarcloud.io \
           -Dsonar.issuesReport.html.enable=true \
-          -Dsonar.issuesReport.html.location=./sonar-report.html  # Guardar el informe en esta ubicación
+          -Dsonar.issuesReport.html.location=./reports/sonar-report.html  # Guardar el informe en esta ubicación
 
       - name: Wait for SonarCloud analysis to finish
         run: |
           sleep 30  # Esperar a que el análisis se complete
+
+      - name: List files
+        run: ls -la  # Listar archivos para verificar si se generó el informe
 
       - name: Fetch Vulnerabilities
         run: |
@@ -40,11 +46,11 @@ jobs:
         run: |
           git config --global user.name "JosueUPT"
           git config --global user.email "jaechambilla@upt.pe"
-          git add sonar-report.html
+          git add reports/sonar-report.html  # Actualizar la ruta del informe
           git commit -m "Add SonarCloud report"
           git push
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Asegúrate de tener un token con permisos de escritura
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   semgrep:
     runs-on: ubuntu-latest
