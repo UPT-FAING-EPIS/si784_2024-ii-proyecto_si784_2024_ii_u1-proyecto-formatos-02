@@ -1,0 +1,54 @@
+name: CI Workflow
+
+on:
+  push:
+    branches:
+      - "13-aplicar-sonarqube"
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    needs: sonar_scan  # Necesita el job de SonarCloud
+    outputs:
+      version: ${{ needs.sonar_scan.outputs.version }}  # Tomar la versión del job de SonarCloud
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Log in to DockerHub
+      run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+
+    - name: Build Docker image
+      run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/pgfanpage:${{ needs.sonar_scan.outputs.version }} .
+
+    - name: Push Docker image
+      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/pgfanpage:${{ needs.sonar_scan.outputs.version }}
+
+  create-release:
+    runs-on: ubuntu-latest
+    needs: build-and-push
+    steps:
+    - name: Create GitHub Release
+      id: create_release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ needs.build-and-push.outputs.version }}
+        release_name: Release ${{ needs.build-and-push.outputs.version }}
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build-and-push
+    steps:
+    - name: Log in to DockerHub
+      run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+
+    - name: Deploy the latest Docker image
+      run: |
+        echo "Pulling image: ${{ secrets.DOCKERHUB_USERNAME }}/pgfanpage:${{ needs.build-and-push.outputs.version }}"
+        docker pull ${{ secrets.DOCKERHUB_USERNAME }}/pgfanpage:${{ needs.build-and-push.outputs.version }}
+        docker run -d -p 80:80 ${{ secrets.DOCKERHUB_USERNAME }}/pgfanpage:${{ needs.build-and-push.outputs.version }}

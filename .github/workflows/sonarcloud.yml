@@ -3,6 +3,7 @@ name: Tarea Automatizada de análisis de código
 env:
   SONAR_ORG: 'pyfanpage'
   SONAR_PROJECT: 'pyfanpage'
+  VERSION: ${{ github.run_number }}  # Usar el número de ejecución como versión
 
 on:
   push:
@@ -34,7 +35,7 @@ jobs:
         run: |
           ANALYSIS_JSON=$(curl -s -u ${{ secrets.SONAR_TOKEN }}: "https://sonarcloud.io/api/qualitygates/project_status?projectKey=${{ env.SONAR_PROJECT }}")
           echo "ANALYSIS_JSON=${ANALYSIS_JSON}" >> $GITHUB_ENV
-          echo "Respuesta de la API: $ANALYSIS_JSON"  # Mostrar respuesta en logs
+          echo "Respuesta de la API: $ANALYSIS_JSON"
           if [ -z "$ANALYSIS_JSON" ]; then
             echo "Error: ANALYSIS_JSON está vacío."
             exit 1
@@ -45,7 +46,7 @@ jobs:
         run: |
           ISSUES_JSON=$(curl -s -u ${{ secrets.SONAR_TOKEN }}: "https://sonarcloud.io/api/issues/search?componentKeys=${{ env.SONAR_PROJECT }}")
           echo "ISSUES_JSON=${ISSUES_JSON}" >> $GITHUB_ENV
-          echo "Respuesta de la API de problemas: $ISSUES_JSON"  # Mostrar respuesta en logs
+          echo "Respuesta de la API de problemas: $ISSUES_JSON"
           if [ -z "$ISSUES_JSON" ]; then
             echo "Error: ISSUES_JSON está vacío."
             exit 1
@@ -54,7 +55,7 @@ jobs:
       - name: Generar reporte HTML
         run: |
           echo "<html><head><title>Reporte de SonarCloud</title></head><body>" > sonar_report.html
-          echo "<h1>Reporte de Calidad para ${{ env.SONAR_PROJECT }}</h1>" >> sonar_report.html
+          echo "<h1>Reporte de Calidad para ${{ env.SONAR_PROJECT }} (Versión: ${{ env.VERSION }})</h1>" >> sonar_report.html
           
           # Obtener estado
           STATUS=$(echo "$ANALYSIS_JSON" | jq -r '.projectStatus.status')
@@ -76,8 +77,8 @@ jobs:
             ISSUE_MSG=$(echo "$issue" | jq -r '.message')
             ISSUE_SEVERITY=$(echo "$issue" | jq -r '.severity')
             ISSUE_FILE=$(echo "$issue" | jq -r '.component')
-            ISSUE_LINE=$(echo "$issue" | jq -r '.line // "N/A"')  # Línea del código, o "N/A" si no existe
-            ISSUE_TYPE=$(echo "$issue" | jq -r '.rule')  # Tipo de error
+            ISSUE_LINE=$(echo "$issue" | jq -r '.line // "N/A"')
+            ISSUE_TYPE=$(echo "$issue" | jq -r '.rule')
             echo "<tr><td>$ISSUE_SEVERITY</td><td>$ISSUE_MSG</td><td>$ISSUE_FILE</td><td>$ISSUE_LINE</td><td>$ISSUE_TYPE</td></tr>" >> sonar_report.html
           done
           echo "</table>" >> sonar_report.html
@@ -86,6 +87,7 @@ jobs:
       - name: Subir a GitHub Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: v2.0.0
-          files: sonar_report.html  # Subiendo directamente el HTML
+          tag_name: v${{ env.VERSION }}
+          release_name: Release v${{ env.VERSION }}
+          files: sonar_report.html
           token: ${{ secrets.GITHUB_TOKEN }}
