@@ -6,15 +6,11 @@
   
   <testsuites>
     <testsuite name="Unit Tests">
-      <directory suffix="Test.php">tests</directory> <!-- Asegúrate de que los tests terminen en 'Test.php' -->
+      <directory suffix="Test.php">tests</directory> <!-- Asegúrate de que tus tests terminen en 'Test.php' -->
     </testsuite>
   </testsuites>
 
   <coverage processUncoveredFiles="true">
-    <report>
-      <clover outputFile="clover.xml"/>
-      <html outputDirectory="html"/>
-    </report>
     <include>
       <directory suffix=".php">src</directory> <!-- Incluir la carpeta src -->
     </include>
