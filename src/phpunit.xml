@@ -1,19 +1,22 @@
-<phpunit>
-    <testsuites>
-        <testsuite name="My Test Suite">
-            <directory>../tests</directory>
-        </testsuite>
-    </testsuites>
+<?xml version="1.0"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+          xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/11.2/phpunit.xsd" 
+          backupGlobals="false" colors="true" 
+          bootstrap="vendor/autoload.php">
+  
+  <testsuites>
+    <testsuite name="Unit Tests">
+      <directory suffix=".php">tests</directory> <!-- Aquí asumo que todos tus tests están en 'tests' -->
+    </testsuite>
+  </testsuites>
 
-    <filter>
-        <whitelist>
-            <directory suffix=".php">../src</directory>
-        </whitelist>
-    </filter>
-
-    <coverage>
-        <include>
-            <directory>../src</directory>
-        </include>
-    </coverage>
+  <coverage>
+    <report>
+      <clover outputFile="clover.xml"/>
+      <html outputDirectory="html"/>
+    </report>
+    <include>
+      <directory suffix=".php">src</directory> <!-- Incluir la carpeta src -->
+    </include>
+  </coverage>
 </phpunit>
