@@ -1,9 +1,8 @@
-name: Tarea Automatizada de análisis de código
+name: SonarCloud Analysis
 
 env:
   SONAR_ORG: 'pyfanpage'
   SONAR_PROJECT: 'pyfanpage'
-  VERSION: ${{ github.run_number }}  # Usar el número de ejecución como versión
 
 on:
   push:
@@ -53,18 +52,10 @@ jobs:
       - name: Generar reporte HTML
         run: |
           echo "<html><head><title>Reporte de SonarCloud</title></head><body>" > sonar_report.html
-          echo "<h1>Reporte de Calidad para ${{ env.SONAR_PROJECT }} (Versión: ${{ env.VERSION }})</h1>" >> sonar_report.html
+          echo "<h1>Reporte de Calidad para ${{ env.SONAR_PROJECT }}</h1>" >> sonar_report.html
           
           STATUS=$(echo "$ANALYSIS_JSON" | jq -r '.projectStatus.status')
           echo "<p>Estado: $STATUS</p>" >> sonar_report.html
-          
-          echo "<h2>Condiciones de Calidad:</h2><ul>" >> sonar_report.html
-          echo "$ANALYSIS_JSON" | jq -c '.projectStatus.conditions[]' | while read -r condition; do
-            METRIC=$(echo "$condition" | jq -r '.metricKey')
-            CONDITION_STATUS=$(echo "$condition" | jq -r '.status')
-            echo "<li>$METRIC: $CONDITION_STATUS</li>" >> sonar_report.html
-          done
-          echo "</ul>" >> sonar_report.html
           
           echo "<h2>Problemas Encontrados:</h2>" >> sonar_report.html
           echo "<table border='1'><tr><th>Severidad</th><th>Mensaje</th><th>Archivo</th><th>Línea</th><th>Tipo de Vulnerabilidad</th></tr>" >> sonar_report.html
@@ -82,7 +73,7 @@ jobs:
       - name: Subir a GitHub Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: v${{ env.VERSION }}
-          release_name: Release v${{ env.VERSION }}
+          tag_name: v${{ github.run_number }}
+          release_name: Release v${{ github.run_number }}
           files: sonar_report.html
           token: ${{ secrets.GITHUB_TOKEN }}
