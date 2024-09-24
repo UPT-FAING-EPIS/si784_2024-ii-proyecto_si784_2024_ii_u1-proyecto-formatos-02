@@ -1,21 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit>
+    <testsuites>
+        <testsuite name="My Test Suite">
+            <directory>../tests</directory> <!-- Asegúrate de que esta ruta es correcta -->
+        </testsuite>
+    </testsuites>
     <coverage>
         <include>
             <directory>./src</directory>
         </include>
-        <exclude>
-            <directory>./tests</directory>
-        </exclude>
     </coverage>
-    <filter>
-        <whitelist>
-            <directory>./src</directory>
-        </whitelist>
-    </filter>
-    <testsuites>
-        <testsuite name="My Test Suite">
-            <directory>../tests</directory> <!-- Cambia esta línea -->
-        </testsuite>
-    </testsuites>
 </phpunit>
