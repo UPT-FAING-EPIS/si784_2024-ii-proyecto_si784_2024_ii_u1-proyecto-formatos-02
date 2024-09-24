@@ -18,13 +18,6 @@ jobs:
       - name: Checkout del repositorio
         uses: actions/checkout@v2
 
-      - name: Download and configure SonarScanner
-        run: |
-          curl -sSLo sonarscanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip
-          unzip sonarscanner.zip
-          mv sonar-scanner-5.0.1.3006-linux sonar-scanner
-          echo "PATH=$PATH:$(pwd)/sonar-scanner/bin" >> $GITHUB_ENV
-
       - name: Run SonarScanner
         run: |
           sonar-scanner -Dsonar.projectKey=${{ env.SONAR_PROJECT }} \
@@ -32,28 +25,8 @@ jobs:
                         -Dsonar.sources=src \
                         -Dsonar.host.url=https://sonarcloud.io \
                         -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
-                        -Dsonar.branch.name=13-aplicar-sonarqube  # Agregar esta línea
+                        -Dsonar.branch.name=13-aplicar-sonarqube
 
-      - name: Wait for analysis to complete
+      - name: Show SonarCloud Report Link
         run: |
-          echo "Waiting for SonarCloud analysis to complete..."
-          sleep 30  # Espera 30 segundos
-
-      - name: Fetch SonarCloud Analysis Results
-        run: |
-          curl -u "${{ secrets.SONAR_TOKEN }}:" \
-            "https://sonarcloud.io/api/project_analyses/search?project=${{ env.SONAR_PROJECT }}" \
-            -o src/sonar-report/analysis-results.json
-
-      - name: Install jq
-        run: |
-          sudo apt-get update && sudo apt-get install -y jq
-
-      - name: Show Analysis Results
-        run: |
-          cat src/sonar-report/analysis-results.json
-
-      - name: Show specific metrics
-        run: |
-          total_issues=$(jq '.paging.total' src/sonar-report/analysis-results.json)
-          echo "Total Issues: $total_issues"
+          echo "View the SonarCloud report here: https://sonarcloud.io/dashboard?id=${{ env.SONAR_PROJECT }}&branch=13-aplicar-sonarqube"
