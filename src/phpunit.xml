@@ -2,8 +2,11 @@
 <phpunit>
     <coverage>
         <include>
-            <directory>./src</directory> 
+            <directory>./src</directory> <!-- Asegúrate de que apunta a la carpeta correcta -->
         </include>
+        <exclude>
+            <directory>./tests</directory> <!-- Excluye el directorio de pruebas, si es necesario -->
+        </exclude>
     </coverage>
     <testsuites>
         <testsuite name="My Test Suite">
