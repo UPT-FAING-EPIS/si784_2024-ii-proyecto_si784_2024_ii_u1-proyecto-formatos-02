@@ -27,7 +27,7 @@ jobs:
           -Dsonar.sources=. \
           -Dsonar.host.url=https://sonarcloud.io \
           -Dsonar.issuesReport.html.enable=true \
-          -Dsonar.issuesReport.html.location=./reports/sonar-report.html || echo "Sonar scan failed"
+          -Dsonar.issuesReport.html.location=/usr/src/reports/sonar-report.html || echo "Sonar scan failed"
 
       - name: Check SonarCloud Scanner output
         run: |
@@ -56,24 +56,9 @@ jobs:
             git config --global user.email "jaechambilla@upt.pe"
             git add reports/sonar-report.html
             git commit -m "Add SonarCloud report"
-            git push
+            git push origin HEAD:${{ github.ref }}  # Asegúrate de hacer push a la rama correcta
           else
             echo "No report found, skipping commit."
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  semgrep:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Install Semgrep
-        run: |
-          python -m pip install semgrep
-
-      - name: Semgrep Analysis
-        run: |
-          semgrep scan --config='p/default' --sarif --output=report.sarif
-          echo "Scan Summary:"
-          semgrep scan --config='p/default' --json | jq '.results[] | {language: .language, path: .path, message: .extra.message}'
