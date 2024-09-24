@@ -6,7 +6,8 @@ env:
 
 on:
   push:
-    branches: ["13-aplicar-sonarqube"]
+    branches:
+      - "13-aplicar-sonarqube"
   workflow_dispatch:
 
 jobs:
