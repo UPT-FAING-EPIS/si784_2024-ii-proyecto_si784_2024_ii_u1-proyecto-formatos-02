@@ -41,7 +41,14 @@ jobs:
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.login=${{ secrets.SONAR_TOKEN }}
 
-      - name: Move SonarQube report to src
+      - name: Fetch SonarQube Analysis Results
         run: |
-          mkdir -p src/sonar-report
-          cp -r $(pwd)/.scannerwork/report* src/sonar-report/
+          curl -u "${{ secrets.SONAR_TOKEN }}:" \
+            "https://sonarcloud.io/api/project_analyses/search?project=${{ env.SONAR_PROJECT }}" \
+            -o src/sonar-report/analysis-results.json
+
+      - name: Archive Reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: sonar-reports
+          path: src/sonar-report/
