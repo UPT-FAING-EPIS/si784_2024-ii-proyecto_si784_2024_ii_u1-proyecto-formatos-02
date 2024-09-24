@@ -1,17 +1,21 @@
-name: SonarCloud Analysis
+name: Tarea Automatizada de análisis de código
+
+env:
+  SONAR_ORG: 'pyfanpage'
+  SONAR_PROJECT: 'pyfanpage'
 
 on:
   push:
-    branches:
-      - main  # Cambia esto según tu rama principal
+    branches: ["13-aplicar-sonarqube"]
+  workflow_dispatch:
 
 jobs:
-  sonarcloud:
-    docker:
-      image: "sonarsource/sonar-scanner-cli"
-    
+  sonar_scan:
+    name: SonarQube Scan
+    runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
+      - name: Checkout del repositorio
         uses: actions/checkout@v2
 
       - name: Build and Run SonarCloud Scanner
@@ -19,15 +23,21 @@ jobs:
           docker run --rm -e SONAR_TOKEN=${{ secrets.SONAR_TOKEN }} \
           -v ${GITHUB_WORKSPACE}:/usr/src \
           sonarsource/sonar-scanner-cli \
-          -Dsonar.projectKey=pyfanpage \
-          -Dsonar.organization=tu_organizacion \
-          -Dsonar.sources=. \
+          -Dsonar.projectKey=${{ env.SONAR_PROJECT }} \
+          -Dsonar.organization=${{ env.SONAR_ORG }} \
+          -Dsonar.sources=src \
           -Dsonar.host.url=https://sonarcloud.io
 
       - name: Wait for SonarCloud analysis to finish
         run: |
-          sleep 60  # Esperar a que el análisis se complete
+          echo "Waiting for SonarCloud analysis to complete..."
+          while true; do
+            status=$(curl -s -u "${{ secrets.SONAR_TOKEN }}: " "https://sonarcloud.io/api/projects/search?projects=${{ env.SONAR_PROJECT }}" | jq -r '.components[0].qualitativeAnalysisStatus')
+            if [[ "$status" == "OK" ]]; then
+              break
+            fi
+            sleep 10  # Esperar 10 segundos antes de volver a verificar
+          done
 
-      - name: Display SonarCloud Report
-        run: |
-          echo "SonarCloud Report: https://sonarcloud.io/project/overview?id=pyfanpage"
+      - name: Output Issues Link
+        run: echo "See all issues at: https://sonarcloud.io/project/issues?id=${{ env.SONAR_PROJECT }}"
