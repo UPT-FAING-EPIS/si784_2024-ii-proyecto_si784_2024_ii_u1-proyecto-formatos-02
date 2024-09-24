@@ -27,38 +27,38 @@ jobs:
           coverage: xdebug
 
       - name: Instalar dependencias
-        run: composer install --prefer-dist --no-progress
+        run: cd src && composer install --prefer-dist --no-progress
 
       - name: Hacer ejecutable PHPUnit
-        run: chmod +x vendor/bin/phpunit
+        run: cd src && chmod +x vendor/bin/phpunit
 
       - name: Ejecutar pruebas con PHPUnit
-        run: vendor/bin/phpunit --configuration phpunit.xml --coverage-clover coverage.xml --coverage-html coverage-report
+        run: cd src && vendor/bin/phpunit --configuration phpunit.xml --coverage-clover coverage.xml --coverage-html coverage-report
 
       - name: Check coverage report
-        run: ls -l coverage-report
+        run: ls -l src/coverage-report
 
       - name: Upload coverage
         uses: actions/upload-artifact@v3
         with:
           name: coverage
-          path: coverage.xml
+          path: src/coverage.xml
 
       - name: Create reports directory
-        run: mkdir -p features/bootstrap/reports
+        run: mkdir -p src/features/bootstrap/reports
 
       - name: Give execute permission to Behat
-        run: chmod +x vendor/bin/behat
+        run: cd src && chmod +x vendor/bin/behat
 
       - name: Run Behat tests
-        run: vendor/bin/behat --format=html --out features/bootstrap/reports/index.html
+        run: cd src && vendor/bin/behat --format=html --out features/bootstrap/reports/index.html
 
       - name: Upload Behat HTML report
         if: always()
         uses: actions/upload-artifact@v3
         with:
           name: behat-report
-          path: features/bootstrap/reports/index.html
+          path: src/features/bootstrap/reports/index.html
 
       - name: Deploy Behat HTML report to GitHub Pages
         if: always()
@@ -66,7 +66,7 @@ jobs:
         with:
           personal_token: ${{ secrets.GIT_TOKEN }}
           publish_branch: bddreporte
-          publish_dir: features/bootstrap/reports
+          publish_dir: src/features/bootstrap/reports
 
       - name: Deploy coverage report to cvgreporte branch
         if: always()
@@ -74,7 +74,7 @@ jobs:
         with:
           personal_token: ${{ secrets.GIT_TOKEN }}
           publish_branch: cvgreporte
-          publish_dir: coverage-report
+          publish_dir: src/coverage-report
 
   sonar_scan:
     name: SonarQube Scan
@@ -108,7 +108,7 @@ jobs:
           sonar-scanner \
             -Dsonar.projectKey=${{ env.SONAR_PROJECT }} \
             -Dsonar.organization=${{ env.SONAR_ORG }} \
-            -Dsonar.sources=. \
+            -Dsonar.sources=src \
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
             -Dsonar.php.coverage.reportPaths=coverage.xml
