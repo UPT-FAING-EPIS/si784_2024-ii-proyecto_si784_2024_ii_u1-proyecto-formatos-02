@@ -41,13 +41,19 @@ jobs:
           echo "<html><head><title>Reporte de SonarCloud</title></head><body>" > sonar_report.html
           echo "<h1>Reporte de Calidad para ${{ env.SONAR_PROJECT }}</h1>" >> sonar_report.html
           
+          # Verificar el contenido de ANALYSIS_JSON
+          if [ -z "$ANALYSIS_JSON" ]; then
+            echo "Error: ANALYSIS_JSON está vacío."
+            exit 1
+          fi
+
           # Obtener estado
-          STATUS=$(echo $ANALYSIS_JSON | jq -r '.projectStatus.status')
+          STATUS=$(echo "$ANALYSIS_JSON" | jq -r '.projectStatus.status')
           echo "<p>Estado: $STATUS</p>" >> sonar_report.html
           
           # Agregar condiciones al reporte
           echo "<h2>Condiciones de Calidad:</h2><ul>" >> sonar_report.html
-          echo $ANALYSIS_JSON | jq -c '.projectStatus.conditions[]' | while read -r condition; do
+          echo "$ANALYSIS_JSON" | jq -c '.projectStatus.conditions[]' | while read -r condition; do
             METRIC=$(echo "$condition" | jq -r '.metricKey')
             CONDITION_STATUS=$(echo "$condition" | jq -r '.status')
             echo "<li>$METRIC: $CONDITION_STATUS</li>" >> sonar_report.html
