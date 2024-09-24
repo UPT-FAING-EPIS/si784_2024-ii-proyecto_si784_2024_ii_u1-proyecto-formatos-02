@@ -1,7 +1,6 @@
 name: Tarea Automatizada de análisis de código
 
 env:
-  PHP_VERSION: '8.2'
   SONAR_ORG: 'pyfanpage'
   SONAR_PROJECT: 'pyfanpage'
 
@@ -19,12 +18,6 @@ jobs:
       - name: Checkout del repositorio
         uses: actions/checkout@v2
 
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-
       - name: Download and configure SonarScanner
         run: |
           curl -sSLo sonarscanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip
@@ -36,26 +29,6 @@ jobs:
         run: |
           sonar-scanner -Dsonar.projectKey=${{ env.SONAR_PROJECT }} \
                         -Dsonar.organization=${{ env.SONAR_ORG }} \
-                        -Dsonar.sources=src,View \
+                        -Dsonar.sources=src \
                         -Dsonar.host.url=https://sonarcloud.io \
                         -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-
-      - name: Create report directory
-        run: |
-          mkdir -p src/sonar-report
-
-      - name: Fetch SonarQube Analysis Results
-        run: |
-          curl -u "${{ secrets.SONAR_TOKEN }}:" \
-            "https://sonarcloud.io/api/project_analyses/search?project=${{ env.SONAR_PROJECT }}" \
-            -o src/sonar-report/analysis-results.json \
-      
-      - name: Show Analysis Results
-        run: |
-          cat src/sonar-report/analysis-results.json
-
-      - name: Archive Reports
-        uses: actions/upload-artifact@v3
-        with:
-          name: sonar-reports
-          path: src/sonar-report/
