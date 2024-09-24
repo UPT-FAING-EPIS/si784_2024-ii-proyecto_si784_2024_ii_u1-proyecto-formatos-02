@@ -55,20 +55,12 @@ jobs:
           done
           echo "</ul></body></html>" >> sonar_report.html
 
-      - name: Publicar reporte como paquete
+      - name: Comprimir el reporte
         run: |
-          mkdir -p package
-          cp sonar_report.html package/
-          cd package
-          composer init --no-interaction --require-dev "php:>=7.4" --name "tu_usuario/sonar-report"
-          composer config repositories.local path .
-          composer config minimum-stability dev
-          composer config prefer-stable true
-          composer archive --format=zip --dir=. --file=sonar-report.zip .
-          echo "::set-output name=PACKAGE_PATH::$(pwd)/sonar-report.zip"
+          zip sonar_report.zip sonar_report.html
 
-      - name: Subir paquete a GitHub Packages
+      - name: Subir reporte como artefacto
         uses: actions/upload-artifact@v3
         with:
           name: sonar-report
-          path: ${{ steps.publish.outputs.PACKAGE_PATH }}
+          path: sonar_report.zip
