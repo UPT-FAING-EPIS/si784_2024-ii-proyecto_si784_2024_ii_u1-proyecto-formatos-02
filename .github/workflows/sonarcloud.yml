@@ -39,7 +39,7 @@ jobs:
         run: ls -l coverage-report
 
       - name: Upload coverage
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: coverage
           path: coverage.xml
@@ -55,7 +55,7 @@ jobs:
 
       - name: Upload Behat HTML report
         if: always()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: behat-report
           path: features/bootstrap/reports/index.html
@@ -99,7 +99,7 @@ jobs:
           echo "PATH=$PATH:$(pwd)/sonar-scanner/bin" >> $GITHUB_ENV
 
       - name: Download coverage
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: coverage
 
