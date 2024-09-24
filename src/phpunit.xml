@@ -12,7 +12,7 @@
 
   <coverage processUncoveredFiles="true">
     <include>
-      <directory suffix=".php">src</directory> <!-- Incluir la carpeta src -->
+      <directory suffix=".php">src/Views</directory> <!-- Cambiado a 'Views' -->
     </include>
   </coverage>
 </phpunit>
