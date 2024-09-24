@@ -2,15 +2,20 @@
 <phpunit>
     <coverage>
         <include>
-            <directory>./src</directory> <!-- Asegúrate de que apunta a la carpeta correcta -->
+            <directory>./src</directory>
         </include>
         <exclude>
-            <directory>./tests</directory> <!-- Excluye el directorio de pruebas, si es necesario -->
+            <directory>./tests</directory>
         </exclude>
     </coverage>
+    <filter>
+        <whitelist>
+            <directory>./src</directory>
+        </whitelist>
+    </filter>
     <testsuites>
         <testsuite name="My Test Suite">
-            <directory>./tests</directory>
+            <directory>../tests</directory> <!-- Cambia esta línea -->
         </testsuite>
     </testsuites>
 </phpunit>
