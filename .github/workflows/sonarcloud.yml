@@ -18,15 +18,33 @@ jobs:
       - name: Checkout del repositorio
         uses: actions/checkout@v2
 
-      - name: Run SonarScanner
+      - name: Build and Run SonarCloud Scanner
         run: |
-          sonar-scanner -Dsonar.projectKey=${{ env.SONAR_PROJECT }} \
-                        -Dsonar.organization=${{ env.SONAR_ORG }} \
-                        -Dsonar.sources=src \
-                        -Dsonar.host.url=https://sonarcloud.io \
-                        -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
-                        -Dsonar.branch.name=13-aplicar-sonarqube
+          docker run --rm -e SONAR_TOKEN=${{ secrets.SONAR_TOKEN }} \
+          -v ${GITHUB_WORKSPACE}:/usr/src \
+          sonarsource/sonar-scanner-cli \
+          -Dsonar.projectKey=${{ env.SONAR_PROJECT }} \
+          -Dsonar.organization=${{ env.SONAR_ORG }} \
+          -Dsonar.sources=src \
+          -Dsonar.host.url=https://sonarcloud.io \
+          -Dsonar.branch.name=13-aplicar-sonarqube
 
-      - name: Show SonarCloud Report Link
+      - name: Wait for SonarCloud analysis to finish
         run: |
-          echo "View the SonarCloud report here: https://sonarcloud.io/dashboard?id=${{ env.SONAR_PROJECT }}&branch=13-aplicar-sonarqube"
+          sleep 30  # Esperar a que el análisis se complete
+
+      - name: Fetch Vulnerabilities
+        run: |
+          echo "## Vulnerabilities Detected"
+          echo "| Message | Severity | Component | Line | Status |"
+          echo "|---------|----------|-----------|------|--------|"
+          curl -u "${{ secrets.SONAR_TOKEN }}: " "https://sonarcloud.io/api/issues/search?componentKeys=${{ env.SONAR_PROJECT }}&types=VULNERABILITY" \
+          | jq -r '.issues[] | "| \(.message) | \(.severity) | \(.component) | \(.line) | \(.status) |"'
+
+      - name: Fetch Code Smells
+        run: |
+          echo "## Code Smells Detected"
+          echo "| Message | Severity | Component | Line | Status |"
+          echo "|---------|----------|-----------|------|--------|"
+          curl -u "${{ secrets.SONAR_TOKEN }}: " "https://sonarcloud.io/api/issues/search?componentKeys=${{ env.SONAR_PROJECT }}&types=CODE_SMELL" \
+          | jq -r '.issues[] | "| \(.message) | \(.severity) | \(.component) | \(.line) | \(.status) |"'
