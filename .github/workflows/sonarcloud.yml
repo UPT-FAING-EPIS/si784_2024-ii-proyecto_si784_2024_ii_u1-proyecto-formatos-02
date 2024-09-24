@@ -70,15 +70,17 @@ jobs:
           echo "</ul>" >> sonar_report.html
           
           # Agregar problemas al reporte
-          echo "<h2>Problemas Encontrados:</h2><ul>" >> sonar_report.html
+          echo "<h2>Problemas Encontrados:</h2>" >> sonar_report.html
+          echo "<table border='1'><tr><th>Severidad</th><th>Mensaje</th><th>Archivo</th><th>Línea</th><th>Tipo de Error</th></tr>" >> sonar_report.html
           echo "$ISSUES_JSON" | jq -c '.issues[]' | while read -r issue; do
             ISSUE_MSG=$(echo "$issue" | jq -r '.message')
             ISSUE_SEVERITY=$(echo "$issue" | jq -r '.severity')
             ISSUE_FILE=$(echo "$issue" | jq -r '.component')
-            echo "<li>[$ISSUE_SEVERITY] $ISSUE_MSG en $ISSUE_FILE</li>" >> sonar_report.html
+            ISSUE_LINE=$(echo "$issue" | jq -r '.line // "N/A"')  # Línea del código, o "N/A" si no existe
+            ISSUE_TYPE=$(echo "$issue" | jq -r '.rule')  # Tipo de error
+            echo "<tr><td>$ISSUE_SEVERITY</td><td>$ISSUE_MSG</td><td>$ISSUE_FILE</td><td>$ISSUE_LINE</td><td>$ISSUE_TYPE</td></tr>" >> sonar_report.html
           done
-          echo "</ul>" >> sonar_report.html
-          
+          echo "</table>" >> sonar_report.html
           echo "</body></html>" >> sonar_report.html
 
       - name: Crear ZIP del reporte
