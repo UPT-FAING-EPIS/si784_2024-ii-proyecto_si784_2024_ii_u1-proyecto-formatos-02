@@ -29,12 +29,11 @@ jobs:
           -Dsonar.sources=src \
           -Dsonar.host.url=https://sonarcloud.io
 
-      - name: Obtener estado del análisis
-        id: sonar_status
+      - name: Obtener problemas del análisis
+        id: sonar_issues
         run: |
-          ANALYSIS_JSON=$(curl -s -u ${{ secrets.SONAR_TOKEN }}: "https://sonarcloud.io/api/qualitygates/project_status?projectKey=${{ env.SONAR_PROJECT }}")
-          echo "ANALYSIS_JSON=${ANALYSIS_JSON}" >> $GITHUB_ENV
-          echo "Respuesta de la API: $ANALYSIS_JSON"
+          ISSUES_JSON=$(curl -s -u ${{ secrets.SONAR_TOKEN }}: "https://sonarcloud.io/api/issues/search?projectKeys=${{ env.SONAR_PROJECT }}&severities=BLOCKER,CRITICAL,MAJOR")
+          echo "ISSUES_JSON=${ISSUES_JSON}" >> $GITHUB_ENV
 
       - name: Generar reporte HTML
         run: |
@@ -59,6 +58,16 @@ jobs:
             echo "<li>$METRIC: $CONDITION_STATUS</li>" >> sonar_report.html
           done
           echo "</ul>" >> sonar_report.html
+
+          # Agregar problemas al reporte
+          echo "<h2>Problemas Encontrados:</h2><ul>" >> sonar_report.html
+          echo "$ISSUES_JSON" | jq -c '.issues[]' | while read -r issue; do
+            ISSUE_MSG=$(echo "$issue" | jq -r '.message')
+            ISSUE_SEVERITY=$(echo "$issue" | jq -r '.severity')
+            echo "<li>[$ISSUE_SEVERITY] $ISSUE_MSG</li>" >> sonar_report.html
+          done
+          echo "</ul>" >> sonar_report.html
+
           echo "</body></html>" >> sonar_report.html
 
       - name: Crear un nuevo release
