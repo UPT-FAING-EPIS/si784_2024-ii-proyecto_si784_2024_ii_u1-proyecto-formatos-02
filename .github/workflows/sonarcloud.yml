@@ -32,12 +32,14 @@ jobs:
       - name: Wait for SonarCloud analysis to finish
         run: |
           echo "Waiting for SonarCloud analysis to complete..."
-          while true; do
+          for i in {1..30}; do  # Limitar el número de intentos
             status=$(curl -s -u "${{ secrets.SONAR_TOKEN }}:" "https://sonarcloud.io/api/projects/search?projects=${{ env.SONAR_PROJECT }}" | jq -r '.components[0].qualitativeAnalysisStatus')
             echo "Current status: $status"  # Imprimir el estado actual
             if [[ "$status" == "OK" ]]; then
+              echo "Analysis completed successfully."
               break
             fi
+            echo "Still waiting..."
             sleep 10  # Esperar 10 segundos antes de volver a verificar
           done
 
