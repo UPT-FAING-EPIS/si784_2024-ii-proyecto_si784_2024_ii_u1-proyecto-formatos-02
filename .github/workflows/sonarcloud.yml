@@ -32,18 +32,28 @@ jobs:
                         -Dsonar.sources=src \
                         -Dsonar.host.url=https://sonarcloud.io \
                         -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
-                        -Dsonar.branch.name=13-aplicar-sonarqube
+                        -Dsonar.branch.name=13-aplicar-sonarqube  # Agregar esta línea
 
-      - name: Create report directory
+      - name: Wait for analysis to complete
         run: |
-          mkdir -p src/sonar-report
+          echo "Waiting for SonarCloud analysis to complete..."
+          sleep 30  # Espera 30 segundos
 
-      - name: Fetch SonarQube Analysis Results
+      - name: Fetch SonarCloud Analysis Results
         run: |
           curl -u "${{ secrets.SONAR_TOKEN }}:" \
             "https://sonarcloud.io/api/project_analyses/search?project=${{ env.SONAR_PROJECT }}" \
             -o src/sonar-report/analysis-results.json
 
+      - name: Install jq
+        run: |
+          sudo apt-get update && sudo apt-get install -y jq
+
       - name: Show Analysis Results
         run: |
           cat src/sonar-report/analysis-results.json
+
+      - name: Show specific metrics
+        run: |
+          total_issues=$(jq '.paging.total' src/sonar-report/analysis-results.json)
+          echo "Total Issues: $total_issues"
