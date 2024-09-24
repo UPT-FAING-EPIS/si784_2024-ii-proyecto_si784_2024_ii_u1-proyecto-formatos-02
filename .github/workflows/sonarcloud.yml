@@ -1,51 +1,114 @@
-name: SonarCloud Scan & Semgrep Analysis
-on: [push, pull_request]
+name: Tarea Automatizada de ejecución de pruebas
+
+env:
+  PHP_VERSION: '8.1'
+  SONAR_ORG: 'pyfanpage'
+  SONAR_PROJECT: 'pyfanpage'
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
 
 jobs:
-  sonarcloud:
+  setup_and_test:
+    name: Setup and Test
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout del repositorio
+        uses: actions/checkout@v2
 
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.1'
+          php-version: ${{ env.PHP_VERSION }}
+          extensions: mbstring, xml, ctype, iconv, intl
+          coverage: xdebug
+
+      - name: Instalar dependencias
+        run: composer install --prefer-dist --no-progress
+
+      - name: Hacer ejecutable PHPUnit
+        run: chmod +x vendor/bin/phpunit
+
+      - name: Ejecutar pruebas con PHPUnit
+        run: vendor/bin/phpunit --configuration phpunit.xml --coverage-clover coverage.xml --coverage-html coverage-report
+
+      - name: Check coverage report
+        run: ls -l coverage-report
+
+      - name: Upload coverage
+        uses: actions/upload-artifact@v2
+        with:
+          name: coverage
+          path: coverage.xml
 
       - name: Create reports directory
-        run: mkdir -p reports
+        run: mkdir -p features/bootstrap/reports
 
-      - name: Build and Run SonarCloud Scanner
-        id: sonar_scan
+      - name: Give execute permission to Behat
+        run: chmod +x vendor/bin/behat
+
+      - name: Run Behat tests
+        run: vendor/bin/behat --format=html --out features/bootstrap/reports/index.html
+
+      - name: Upload Behat HTML report
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: behat-report
+          path: features/bootstrap/reports/index.html
+
+      - name: Deploy Behat HTML report to GitHub Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          personal_token: ${{ secrets.GIT_TOKEN }}
+          publish_branch: bddreporte
+          publish_dir: features/bootstrap/reports
+
+      - name: Deploy coverage report to cvgreporte branch
+        if: always()
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          personal_token: ${{ secrets.GIT_TOKEN }}
+          publish_branch: cvgreporte
+          publish_dir: coverage-report
+
+  sonar_scan:
+    name: SonarQube Scan
+    needs: setup_and_test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v2
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Download and configure SonarScanner
         run: |
-          docker run --rm -e SONAR_TOKEN=${{ secrets.SONAR_TOKEN }} \
-          -v ${GITHUB_WORKSPACE}:/usr/src \
-          sonarsource/sonar-scanner-cli \
-          -Dsonar.projectKey=pyfanpage \
-          -Dsonar.organization=pyfanpage \
-          -Dsonar.host.url=https://sonarcloud.io \
-          -Dsonar.sources=./src \  # Asegúrate de que apunta a la carpeta correcta
-          -Dsonar.php.coverage.reportPaths=coverage.xml \
-          -Dsonar.issuesReport.html.enable=true \
-          -Dsonar.issuesReport.html.location=reports/sonar-report.html  # Ubicación del informe
+          curl -sSLo sonarscanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip
+          unzip sonarscanner.zip
+          mv sonar-scanner-5.0.1.3006-linux sonar-scanner
+          echo "PATH=$PATH:$(pwd)/sonar-scanner/bin" >> $GITHUB_ENV
 
-      - name: List files in reports directory
-        run: ls -la reports/
+      - name: Download coverage
+        uses: actions/download-artifact@v2
+        with:
+          name: coverage
 
-      - name: Wait for SonarCloud analysis to finish
+      - name: Run SonarScanner
         run: |
-          sleep 60  # Aumentar el tiempo de espera
-
-      - name: Commit and Push HTML Report
-        run: |
-          if [ -f reports/sonar-report.html ]; then
-            git config --global user.name "JosueUPT"
-            git config --global user.email "jaechambilla@upt.pe"
-            git add reports/sonar-report.html
-            git commit -m "Add SonarCloud report"
-            git push origin HEAD:${{ github.ref }}
-          else
-            echo "No report found, skipping commit."
-          fi
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          sonar-scanner \
+            -Dsonar.projectKey=${{ env.SONAR_PROJECT }} \
+            -Dsonar.organization=${{ env.SONAR_ORG }} \
+            -Dsonar.sources=. \
+            -Dsonar.host.url=https://sonarcloud.io \
+            -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
+            -Dsonar.php.coverage.reportPaths=coverage.xml
