@@ -74,7 +74,8 @@ jobs:
           echo "$ISSUES_JSON" | jq -c '.issues[]' | while read -r issue; do
             ISSUE_MSG=$(echo "$issue" | jq -r '.message')
             ISSUE_SEVERITY=$(echo "$issue" | jq -r '.severity')
-            echo "<li>[$ISSUE_SEVERITY] $ISSUE_MSG</li>" >> sonar_report.html
+            ISSUE_FILE=$(echo "$issue" | jq -r '.component')
+            echo "<li>[$ISSUE_SEVERITY] $ISSUE_MSG en $ISSUE_FILE</li>" >> sonar_report.html
           done
           echo "</ul>" >> sonar_report.html
           
