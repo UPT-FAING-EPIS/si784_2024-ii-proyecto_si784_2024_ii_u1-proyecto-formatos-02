@@ -50,7 +50,10 @@ jobs:
           curl -u "${{ secrets.SONAR_TOKEN }}:" \
             "https://sonarcloud.io/api/project_analyses/search?project=${{ env.SONAR_PROJECT }}" \
             -o src/sonar-report/analysis-results.json \
-            -v  # Añadir verbose para ver más detalles
+      
+      - name: Show Analysis Results
+        run: |
+          cat src/sonar-report/analysis-results.json
 
       - name: Archive Reports
         uses: actions/upload-artifact@v3
