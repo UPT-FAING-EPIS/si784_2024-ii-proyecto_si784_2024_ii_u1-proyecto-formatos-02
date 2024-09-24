@@ -34,7 +34,7 @@ jobs:
         run: |
           ANALYSIS_JSON=$(curl -s -u ${{ secrets.SONAR_TOKEN }}: "https://sonarcloud.io/api/qualitygates/project_status?projectKey=${{ env.SONAR_PROJECT }}")
           echo "ANALYSIS_JSON=${ANALYSIS_JSON}" >> $GITHUB_ENV
-          echo "Respuesta de la API: $ANALYSIS_JSON"  # Mostrar respuesta en logs
+          echo "Respuesta de la API: $ANALYSIS_JSON"
 
       - name: Generar reporte HTML
         run: |
@@ -61,8 +61,19 @@ jobs:
           echo "</ul>" >> sonar_report.html
           echo "</body></html>" >> sonar_report.html
 
-      - name: Subir reporte como artefacto
-        uses: actions/upload-artifact@v3
-        with:
-          name: sonar-report
-          path: sonar_report.html
+      - name: Crear un nuevo release
+        id: create_release
+        run: |
+          VERSION="1.0.0"  # Cambia esto según sea necesario
+          RESPONSE=$(curl -s -X POST -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          -H "Accept: application/vnd.github.v3+json" \
+          https://api.github.com/repos/${{ github.repository }}/releases \
+          -d "{\"tag_name\": \"v$VERSION\", \"name\": \"Release $VERSION\", \"body\": \"Reporte de calidad generado\"}")
+          echo "RELEASE_ID=$(echo $RESPONSE | jq -r .id)" >> $GITHUB_ENV
+
+      - name: Subir reporte al release
+        run: |
+          curl -X POST -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          -H "Content-Type: $(file -b --mime-type sonar_report.html)" \
+          --data-binary @sonar_report.html \
+          "https://uploads.github.com/repos/${{ github.repository }}/releases/$RELEASE_ID/assets?name=sonar_report.html"
