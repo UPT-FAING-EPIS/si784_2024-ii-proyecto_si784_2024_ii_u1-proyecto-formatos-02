@@ -69,9 +69,9 @@ jobs:
           done
           echo "</ul>" >> sonar_report.html
           
-          # Agregar problemas al reporte
+          # Agregar problemas al reporte en una tabla
           echo "<h2>Problemas Encontrados:</h2>" >> sonar_report.html
-          echo "<table border='1'><tr><th>Severidad</th><th>Mensaje</th><th>Archivo</th><th>Línea</th><th>Tipo de Error</th></tr>" >> sonar_report.html
+          echo "<table border='1'><tr><th>Severidad</th><th>Mensaje</th><th>Archivo</th><th>Línea</th><th>Tipo de Vulnerabilidad</th></tr>" >> sonar_report.html
           echo "$ISSUES_JSON" | jq -c '.issues[]' | while read -r issue; do
             ISSUE_MSG=$(echo "$issue" | jq -r '.message')
             ISSUE_SEVERITY=$(echo "$issue" | jq -r '.severity')
@@ -83,15 +83,9 @@ jobs:
           echo "</table>" >> sonar_report.html
           echo "</body></html>" >> sonar_report.html
 
-      - name: Crear ZIP del reporte
-        run: zip sonar_report.zip sonar_report.html
-
-      - name: Listar archivos
-        run: ls -la
-
       - name: Subir a GitHub Release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: v2.0.0
-          files: sonar_report.zip
+          files: sonar_report.html  # Subiendo directamente el HTML
           token: ${{ secrets.GITHUB_TOKEN }}
