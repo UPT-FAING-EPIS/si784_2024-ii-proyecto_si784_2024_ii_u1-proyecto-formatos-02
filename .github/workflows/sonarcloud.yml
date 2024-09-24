@@ -32,7 +32,7 @@ jobs:
         run: |
           echo "Waiting for SonarCloud analysis to complete..."
           while true; do
-            status=$(curl -s -u "${{ secrets.SONAR_TOKEN }}: " "https://sonarcloud.io/api/projects/search?projects=${{ env.SONAR_PROJECT }}" | jq -r '.components[0].qualitativeAnalysisStatus')
+            status=$(curl -s -u "${{ secrets.SONAR_TOKEN }}:" "https://sonarcloud.io/api/projects/search?projects=${{ env.SONAR_PROJECT }}" | jq -r '.components[0].qualitativeAnalysisStatus')
             if [[ "$status" == "OK" ]]; then
               break
             fi
