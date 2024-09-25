@@ -25,7 +25,7 @@ jobs:
       # Run Semgrep scan
       - name: Run Semgrep
         run: |
-          semgrep --config semgrep.yml --include '**/*.php' -o semgrep.sarif --verbose
+          semgrep --config semgrep.yml --include 'src/**/*.php' -o semgrep.sarif --verbose --no-git-ignore
 
       # Upload SARIF file as an artifact
       - name: Upload SARIF file
