@@ -13,6 +13,11 @@ jobs:
       - name: Checkout del repositorio
         uses: actions/checkout@v3
 
+      - name: Configurar variables de entorno
+        run: |
+          echo "SONAR_PROJECT=tu_clave_de_proyecto" >> $GITHUB_ENV
+          echo "SONAR_ORG=tu_organizacion" >> $GITHUB_ENV
+
       - name: Build and Run SonarCloud Scanner
         run: |
           docker run --rm -e SONAR_TOKEN=${{ secrets.SONAR_TOKEN }} \
@@ -64,7 +69,7 @@ jobs:
           echo "</table>" >> sonar_report.html
           echo "</body></html>" >> sonar_report.html
 
-      - name: Save sonar report as artifact
+      - name: Guardar reporte de sonar como artefacto
         uses: actions/upload-artifact@v3
         with:
           name: sonar-report
