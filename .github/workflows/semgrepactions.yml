@@ -12,22 +12,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout project source
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # Install Semgrep
       - name: Install Semgrep
         run: |
           python3 -m pip install --upgrade pip
           python3 -m pip install semgrep
 
-      # Run Semgrep scan on all PHP files in src/
       - name: Run Semgrep
         run: |
-          semgrep --config semgrep.yml --include 'src/**/*.php' -o semgrep.sarif --verbose --no-git-ignore
+          semgrep --config semgrep.yml --include 'src/**/*.php' -o semgrep.sarif --verbose || { echo "Semgrep failed"; exit 1; }
 
-      # Upload SARIF file as an artifact
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v3
         with:

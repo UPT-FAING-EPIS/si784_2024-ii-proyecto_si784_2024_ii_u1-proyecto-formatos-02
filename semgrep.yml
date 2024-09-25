@@ -4,3 +4,9 @@ rules:
     message: "Avoid using eval"
     severity: WARNING
     languages: [php]
+
+  - id: another-example
+    pattern: "$X = $Y"
+    message: "Avoid using assignments in conditionals"
+    severity: WARNING
+    languages: [php]
