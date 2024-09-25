@@ -1,0 +1,6 @@
+rules:
+  - id: example-rule
+    pattern: "eval(...)"
+    message: "Avoid using eval"
+    severity: WARNING
+    languages: [php]
