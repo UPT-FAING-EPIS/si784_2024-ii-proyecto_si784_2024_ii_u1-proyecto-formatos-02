@@ -70,10 +70,12 @@ jobs:
           echo "</table>" >> sonar_report.html
           echo "</body></html>" >> sonar_report.html
 
-      - name: Subir Reporte de Tests
-        uses: actions/upload-artifact@v4
-        with:
-          name: sonar_report-report
-          path: sonar_report.html
-
-     
+      - name: Subir reporte al repositorio
+        run: |
+          git config --local user.email "jachambilla@upt.pe"
+          git config --local user.name "JosueUPT"
+          git add sonar_report.html
+          git commit -m "Agregar reporte de SonarCloud"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Asegúrate de que este token tenga permisos de escritura
