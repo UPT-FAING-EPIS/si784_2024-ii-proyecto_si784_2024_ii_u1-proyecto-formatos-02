@@ -1,23 +1,17 @@
-name: SonarCloud Analysis
-
-env:
-  SONAR_ORG: 'pyfanpage'
-  SONAR_PROJECT: 'pyfanpage'
+name: CI Workflow
 
 on:
   push:
     branches:
-      - "13-aplicar-sonarqube"
-  workflow_dispatch:
+      - 13-aplicar-sonarqube  # Cambia la rama aquí
 
 jobs:
-  sonar_scan:
-    name: SonarQube Scan
+  sonar-scan:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout del repositorio
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Build and Run SonarCloud Scanner
         run: |
@@ -70,10 +64,83 @@ jobs:
           echo "</table>" >> sonar_report.html
           echo "</body></html>" >> sonar_report.html
 
-      - name: Subir a GitHub Release
+      - name: Save sonar report as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: sonar-report
+          path: sonar_report.html
+
+  build-and-push:
+    runs-on: ubuntu-latest
+    needs: sonar-scan
+    outputs:
+      version: ${{ steps.vars.outputs.version }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Log in to DockerHub
+        run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+
+      - name: Get the version number
+        id: vars
+        run: |
+          VERSION=1.0.$(git rev-list --count HEAD)-$(git rev-parse --short HEAD)
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          echo "::set-output name=version::$VERSION"
+
+      - name: Build Docker image
+        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/pgfanpage:${{ env.VERSION }} .
+
+      - name: Push Docker image
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/pgfanpage:${{ env.VERSION }}
+
+  create-release:
+    runs-on: ubuntu-latest
+    needs: build-and-push
+    steps:
+      - name: Get the latest Docker image tag
+        id: get_latest_tag
+        run: |
+          TAGS_JSON=$(curl -s "https://registry.hub.docker.com/v2/repositories/${{ secrets.DOCKERHUB_USERNAME }}/pgfanpage/tags/")
+          LATEST_TAG=$(echo $TAGS_JSON | jq -r '.results | sort_by(.last_updated) | last | .name')
+          echo "LATEST_TAG=${LATEST_TAG}" >> $GITHUB_ENV
+          echo "Latest tag found: ${LATEST_TAG}"
+
+      - name: Create GitHub Release
+        id: create_release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: v${{ github.run_number }}
-          release_name: Release v${{ github.run_number }}
+          tag_name: ${{ env.LATEST_TAG }}
+          release_name: Release ${{ env.LATEST_TAG }}
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Download sonar report artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: sonar-report
+
+      - name: Upload sonar report to GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ env.LATEST_TAG }}
+          release_name: Release ${{ env.LATEST_TAG }}
           files: sonar_report.html
           token: ${{ secrets.GITHUB_TOKEN }}
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build-and-push
+    steps:
+      - name: Log in to DockerHub
+        run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+
+      - name: Deploy the latest Docker image
+        run: |
+          echo "Pulling image: ${{ secrets.DOCKERHUB_USERNAME }}/pgfanpage:${{ needs.build-and-push.outputs.version }}"
+          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/pgfanpage:${{ needs.build-and-push.outputs.version }}
+          docker run -d -p 80:80 ${{ secrets.DOCKERHUB_USERNAME }}/pgfanpage:${{ needs.build-and-push.outputs.version }}
