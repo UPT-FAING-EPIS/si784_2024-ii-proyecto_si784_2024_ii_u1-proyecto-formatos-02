@@ -76,10 +76,4 @@ jobs:
           name: sonar_report-report
           path: sonar_report.html
 
-      - name: Subir a GitHub Release
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: v${{ github.run_number }}
-          release_name: Release v${{ github.run_number }}
-          files: sonar_report.html
-          token: ${{ secrets.GITHUB_TOKEN }}
+     
