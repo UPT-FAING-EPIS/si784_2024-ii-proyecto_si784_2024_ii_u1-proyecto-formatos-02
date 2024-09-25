@@ -1,0 +1,33 @@
+name: Semgrep Scan
+
+on:
+  push:
+    branches: [ "13-aplicar-sonarqube" ]
+  pull_request:
+    branches: [ "13-aplicar-sonarqube" ]
+
+jobs:
+  semgrep:
+    name: Scan with Semgrep
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout project source
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Install Semgrep
+      - name: Install Semgrep
+        run: |
+          curl -sSL https://get.semgrep.dev | sh
+
+      # Run Semgrep scan
+      - name: Run Semgrep
+        run: |
+          ./semgrep --config path/to/semgrep.yml --include 'src/**/*.php' --output-format sarif > semgrep.sarif
+
+      # Upload SARIF file as an artifact
+      - name: Upload SARIF file
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: semgrep.sarif
