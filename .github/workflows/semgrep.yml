@@ -12,9 +12,9 @@ name: Semgrep
 
 on:
   push:
-    branches: [ "13-aplicar-sonarqube" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "13-aplicar-sonarqube" ]
+    branches: [ "main" ]
   schedule:
     - cron: '36 22 * * 3'
 
