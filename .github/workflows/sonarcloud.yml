@@ -1,4 +1,4 @@
-name: SonarCloud Analysis
+name: SonarCloud Analysis and Docker Build
 
 env:
   SONAR_ORG: 'pyfanpage'
@@ -32,7 +32,7 @@ jobs:
       - name: Obtener estado del análisis
         id: sonar_status
         run: |
-          ANALYSIS_JSON=$(curl -s -u "${{ secrets.SONAR_TOKEN }}: "https://sonarcloud.io/api/qualitygates/project_status?projectKey=${{ env.SONAR_PROJECT }}")
+          ANALYSIS_JSON=$(curl -s -u "${{ secrets.SONAR_TOKEN }}:" "https://sonarcloud.io/api/qualitygates/project_status?projectKey=${{ env.SONAR_PROJECT }}")
           echo "ANALYSIS_JSON=${ANALYSIS_JSON}" >> $GITHUB_ENV
           if [ -z "$ANALYSIS_JSON" ]; then
             echo "Error: ANALYSIS_JSON está vacío."
@@ -42,7 +42,7 @@ jobs:
       - name: Obtener problemas del análisis
         id: sonar_issues
         run: |
-          ISSUES_JSON=$(curl -s -u "${{ secrets.SONAR_TOKEN }}: "https://sonarcloud.io/api/issues/search?componentKeys=${{ env.SONAR_PROJECT }}")
+          ISSUES_JSON=$(curl -s -u "${{ secrets.SONAR_TOKEN }}:" "https://sonarcloud.io/api/issues/search?componentKeys=${{ env.SONAR_PROJECT }}")
           echo "ISSUES_JSON=${ISSUES_JSON}" >> $GITHUB_ENV
           if [ -z "$ISSUES_JSON" ]; then
             echo "Error: ISSUES_JSON está vacío."
@@ -87,6 +87,7 @@ jobs:
 
       - name: Push Docker image to Docker Hub
         run: |
+          echo "Pushing Docker image to Docker Hub"
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/pgfanpage:${{ env.VERSION }}
 
       - name: Subir a GitHub Release
