@@ -86,9 +86,7 @@ jobs:
           echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin || true
 
       - name: Push Docker image to Docker Hub
-        run: |
-          echo "Pushing Docker image ${{ secrets.DOCKERHUB_USERNAME }}/pgfanpage:${{ env.VERSION }}"
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/pgfanpage:${{ env.VERSION }}
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/pgfanpage:${{ env.VERSION }}
 
       - name: Subir a GitHub Release
         uses: softprops/action-gh-release@v1
