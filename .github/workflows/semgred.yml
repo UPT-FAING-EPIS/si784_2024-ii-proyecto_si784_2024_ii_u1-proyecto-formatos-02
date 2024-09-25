@@ -19,12 +19,13 @@ jobs:
       # Install Semgrep
       - name: Install Semgrep
         run: |
-          curl -sSL https://get.semgrep.dev | sh
+          python3 -m pip install --upgrade pip
+          python3 -m pip install semgrep
 
       # Run Semgrep scan
       - name: Run Semgrep
         run: |
-          ./semgrep --config path/to/semgrep.yml --include 'src/**/*.php' --output-format sarif > semgrep.sarif
+          semgrep --config path/to/semgrep.yml --include 'src/**/*.php' --output-format sarif > semgrep.sarif
 
       # Upload SARIF file as an artifact
       - name: Upload SARIF file
