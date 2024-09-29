@@ -1,0 +1,12 @@
+D:\C#\PRUEBA\NegocioPDF\bin\Debug\net8.0\NegocioPDF.deps.json
+D:\C#\PRUEBA\NegocioPDF\bin\Debug\net8.0\NegocioPDF.dll
+D:\C#\PRUEBA\NegocioPDF\bin\Debug\net8.0\NegocioPDF.pdb
+D:\C#\PRUEBA\NegocioPDF\obj\Debug\net8.0\NegocioPDF.csproj.AssemblyReference.cache
+D:\C#\PRUEBA\NegocioPDF\obj\Debug\net8.0\NegocioPDF.GeneratedMSBuildEditorConfig.editorconfig
+D:\C#\PRUEBA\NegocioPDF\obj\Debug\net8.0\NegocioPDF.AssemblyInfoInputs.cache
+D:\C#\PRUEBA\NegocioPDF\obj\Debug\net8.0\NegocioPDF.AssemblyInfo.cs
+D:\C#\PRUEBA\NegocioPDF\obj\Debug\net8.0\NegocioPDF.csproj.CoreCompileInputs.cache
+D:\C#\PRUEBA\NegocioPDF\obj\Debug\net8.0\NegocioPDF.dll
+D:\C#\PRUEBA\NegocioPDF\obj\Debug\net8.0\refint\NegocioPDF.dll
+D:\C#\PRUEBA\NegocioPDF\obj\Debug\net8.0\NegocioPDF.pdb
+D:\C#\PRUEBA\NegocioPDF\obj\Debug\net8.0\ref\NegocioPDF.dll
