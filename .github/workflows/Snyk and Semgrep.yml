@@ -8,11 +8,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Instalar Snyk
+        run: npm install -g snyk
+
       - name: Ejecutar análisis de Snyk
         run: snyk test --json-file-output=snyk-report.json
 
       - name: Convertir Snyk a HTML
-        run: snyk-to-html -i snyk-report.json -o snyk-report.html
+        run: npx snyk-to-html -i snyk-report.json -o snyk-report.html
 
       - name: Mover el reporte de Snyk a la carpeta 'public/snyk'
         run: |
