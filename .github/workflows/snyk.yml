@@ -31,4 +31,3 @@ jobs:
         with:
           github_token: ${{ secrets.G_TOKEN }}
           publish_dir: .  # Publicar el archivo HTML generado en la raíz
-          publish_branch: main  # Publicar en la rama gh-pages
