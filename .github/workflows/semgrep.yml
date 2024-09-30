@@ -19,10 +19,10 @@ jobs:
       - name: Convertir a HTML
         run: prospector-html --input semgrep.json --output semgrep-report.html --filter semgrep || true
 
-      - name: Mover el reporte a la carpeta 'public'
+      - name: Mover el reporte a la carpeta 'public/semgrep'
         run: |
-          mkdir -p public
-          mv semgrep-report.html public/
+          mkdir -p public/semgrep
+          mv semgrep-report.html public/semgrep/
 
       - name: Publicar en GitHub Pages deploy-pages
         uses: peaceiris/actions-gh-pages@v3
