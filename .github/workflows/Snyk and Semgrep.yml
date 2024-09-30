@@ -11,6 +11,9 @@ jobs:
       - name: Instalar Snyk
         run: npm install -g snyk
 
+      - name: Autenticar Snyk
+        run: snyk auth ${{ secrets.SNYK_TOKEN }}
+
       - name: Ejecutar análisis de Snyk
         run: snyk test --json-file-output=snyk-report.json
 
