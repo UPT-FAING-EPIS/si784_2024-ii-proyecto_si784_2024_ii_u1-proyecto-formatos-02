@@ -22,7 +22,7 @@ jobs:
         run: npm install -g snyk-to-html
 
       - name: Snyk monitor
-        run: snyk code test --json | snyk-to-html -o snyk-report.html
+        run: snyk code test --json | snyk-to-html -o index.html
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
