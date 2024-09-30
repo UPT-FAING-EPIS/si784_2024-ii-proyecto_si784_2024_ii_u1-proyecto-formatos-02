@@ -1,10 +1,7 @@
 name: Snyk Analysis
 env:
   DOTNET_VERSION: '8.x'                     # la versión de .NET
-on: 
-  push:
-    branches:
-      - main    # Ejecutar en push a la rama main, ajusta esto según tu rama
+on: push
 permissions:
   contents: write
 jobs:
@@ -14,9 +11,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         
-      - uses: snyk/actions/setup@v2
+      - uses: snyk/actions/setup@master
       
-      - name: Configurar la versión de .NET
+      - name: Configurando la versión de NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
@@ -24,14 +21,13 @@ jobs:
       - name: Instalar snyk-to-html
         run: npm install -g snyk-to-html
 
-      - name: Ejecutar Snyk y generar reporte HTML
+      - name: Snyk monitor
         run: snyk code test --json | snyk-to-html -o snyk-report.html
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
-      - name: Publicar en GitHub Pages
+      - name: Publicar en GitHub Pages deploy-pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.G_TOKEN }}
-          publish_dir: ./  # Directorio de publicación donde se encuentra 'snyk-report.html'
-          publish_branch: gh-pages   # Publicar en la rama gh-pages
+          publish_dir: .  # Publicar el archivo HTML generado en la raíz
