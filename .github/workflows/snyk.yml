@@ -1,1 +1,45 @@
+name: Snyk Analysis
+env:
+  DOTNET_VERSION: '8.x'                     # la versión de .NET
+on: push
+permissions:
+  contents: write
+jobs:
+  security:
+    runs-on: ubuntu-latest
+    container:
+      image: semgrep/semgrep
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - uses: snyk/actions/setup@master
+      - uses: actions/checkout@v4
 
+      - name: Configurando la versión de NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+      
+      - name: Instalar snyk-to-html
+        run: npm install -g snyk-to-html
+      - name: Instalar prospector-html
+        run: python -m pip install prospector2html
+      - name: Semgrep scan
+        run: semgrep scan --config="p/default" --json --output another-analysis.json --metrics=off
+      - name: Convertir a HTML
+        run: prospector-html --input another-analysis.json --output another-report.html --filter semgrep || true
+
+      - name: Snyk monitor
+        run: snyk code test --json | snyk-to-html -o index.html
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      - name: Mover el reporte a la carpeta 'public/another-analysis'
+        run: |
+          mkdir -p public/another-analysis
+          mv another-report.html public/another-analysis/
+      - name: Publicar en GitHub Pages deploy-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.G_TOKEN }}
+          publish_dir: .  # Publicar el archivo HTML generado en la raíz
