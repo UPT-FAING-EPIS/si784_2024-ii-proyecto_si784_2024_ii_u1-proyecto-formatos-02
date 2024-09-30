@@ -1,0 +1,46 @@
+name: SonarQube Analysis
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  sonarQubeAnalysis:
+    name: SonarQube Analysis
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0.x' # Cambia si estás usando otra versión de .NET
+
+    - name: Restore dependencies
+      run: dotnet restore PROYECTOPDFFINAL/ProyectoPDF.sln
+
+    - name: Build solution
+      run: dotnet build PROYECTOPDFFINAL/ProyectoPDF.sln --no-restore
+
+    - name: Run tests
+      run: dotnet test PROYECTOPDFFINAL/ProyectoPDF.sln --no-build --collect:"XPlat Code Coverage"
+
+    - name: Prepare SonarQube
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      run: |
+        dotnet tool install --global dotnet-sonarscanner
+        dotnet sonarscanner begin /k:"testproyectopdf" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml"
+
+    - name: Run SonarQube analysis
+      run: dotnet build PROYECTOPDFFINAL/ProyectoPDF.sln
+
+    - name: Complete SonarQube analysis
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      run: dotnet sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
