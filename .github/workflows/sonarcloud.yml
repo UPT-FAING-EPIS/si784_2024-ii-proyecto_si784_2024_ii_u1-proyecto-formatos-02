@@ -5,39 +5,33 @@ on:
     branches:
       - main
   pull_request:
-    types: [opened, synchronize, reopened]
+    branches:
+      - main
 
 jobs:
-  sonarQubeAnalysis:
-    name: SonarQube Analysis
+  sonarqube:
     runs-on: windows-latest
 
     steps:
-    - name: Checkout repository
+    - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Setup .NET
+    - name: Setup .NET Core
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: '8.0.x' # Cambia si estás usando otra versión de .NET
+        dotnet-version: '8.0.x'
 
-    - name: Restore dependencies
-      run: dotnet restore PROYECTOPDFFINAL/ProyectoPDF.sln
+    - name: Install SonarQube Scanner
+      run: dotnet tool install --global dotnet-sonarscanner
 
-    - name: Build solution
-      run: dotnet build PROYECTOPDFFINAL/ProyectoPDF.sln --no-restore
+    - name: Start SonarQube analysis
+      run: dotnet-sonarscanner begin /k:"testproyectopdf_proyectopdftest" /o:"proyectopdftest" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
 
-        - name: Prepare SonarQube
-      env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      run: |
-        dotnet tool install --global dotnet-sonarscanner
-        dotnet sonarscanner begin /k:"testProyectoPDF" /o:"testproyectopdf" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml"
-
-    - name: Run SonarQube analysis
+    - name: Build the project
       run: dotnet build PROYECTOPDFFINAL/ProyectoPDF.sln
 
+    - name: Run tests
+      run: dotnet test PROYECTOPDFFINAL/ProyectoPDF.sln --no-build
+
     - name: Complete SonarQube analysis
-      env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      run: dotnet sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+      run: dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
