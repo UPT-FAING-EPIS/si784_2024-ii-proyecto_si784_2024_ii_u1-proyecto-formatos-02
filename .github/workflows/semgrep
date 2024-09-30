@@ -1,0 +1,31 @@
+name: Semgrep Analysis
+env:
+  DOTNET_VERSION: '8.x'                     # La versión de .NET
+on: push
+jobs:
+  security:
+    runs-on: ubuntu-latest
+    container:
+      image: semgrep/semgrep
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Instalar prospector-html
+        run: python -m pip install prospector2html
+
+      - name: Semgrep scan
+        run: semgrep scan --config="p/default" --json --output semgrep.json --metrics=off
+
+      - name: Convertir a HTML
+        run: prospector-html --input semgrep.json --output semgrep-report.html --filter semgrep || true
+
+      - name: Mover el reporte a la carpeta 'public'
+        run: |
+          mkdir -p public
+          mv semgrep-report.html public/
+
+      - name: Publicar en GitHub Pages deploy-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.G_TOKEN }}
+          publish_dir: public  # Publicar el archivo HTML en la carpeta 'public'
