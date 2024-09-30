@@ -2,7 +2,7 @@ name: SonarCloud
 on:
   push:
     branches:
-      - main
+      - master
   pull_request:
     types: [opened, synchronize, reopened]
 
@@ -16,11 +16,11 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: 17
-          distribution: 'zulu' # Otra opción de distribución también es posible.
+          distribution: 'zulu'
 
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Se deshabilitan los clones superficiales para una mejor relevancia del análisis.
+          fetch-depth: 0
 
       - name: Cache SonarCloud packages
         uses: actions/cache@v4
@@ -46,10 +46,11 @@ jobs:
 
       - name: Build and analyze
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Necesario para obtener información de PR, si la hay
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
+          cd PROYECTOPDFFINAL  # Cambia al directorio que contiene tu archivo .sln
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"testproyectopdf_proyectopdftest" /o:"proyectopdftest" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-          dotnet build PROYECTOPDFFINAL/ProyectoPDF.sln
+          dotnet build ProyectoPDF.sln
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
