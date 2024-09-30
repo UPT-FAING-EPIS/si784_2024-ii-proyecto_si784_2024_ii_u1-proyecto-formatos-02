@@ -46,6 +46,6 @@ jobs:
         shell: powershell
         run: |
           cd PROYECTOPDFFINAL  # Cambia al directorio que contiene tu archivo .sln
-          dotnet-sonarscanner begin /k:"testproyectopdf_proyectopdftest" /o:"proyectopdftest" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+          dotnet-sonarscanner begin /k:"testproyectopdf_proyectopdftest" /o:"testProyectoPDF" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
           dotnet build ProyectoPDF.sln
           dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
