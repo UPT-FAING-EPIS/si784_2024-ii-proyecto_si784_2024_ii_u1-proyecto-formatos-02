@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\C#\\PRUEBA\\PROYECTOPDF\\PROYECTOPDF.csproj": {}
+    "D:\\CALIDAD SOFTWARE\\proyecto-si784-2024-ii-u1-FloresR_Salinas_ticahuanca\\PROYECTOPDF\\PROYECTOPDF.csproj": {}
   },
   "projects": {
-    "D:\\C#\\PRUEBA\\NegocioPDF\\NegocioPDF.csproj": {
+    "D:\\CALIDAD SOFTWARE\\proyecto-si784-2024-ii-u1-FloresR_Salinas_ticahuanca\\NegocioPDF\\NegocioPDF.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\C#\\PRUEBA\\NegocioPDF\\NegocioPDF.csproj",
+        "projectUniqueName": "D:\\CALIDAD SOFTWARE\\proyecto-si784-2024-ii-u1-FloresR_Salinas_ticahuanca\\NegocioPDF\\NegocioPDF.csproj",
         "projectName": "NegocioPDF",
-        "projectPath": "D:\\C#\\PRUEBA\\NegocioPDF\\NegocioPDF.csproj",
+        "projectPath": "D:\\CALIDAD SOFTWARE\\proyecto-si784-2024-ii-u1-FloresR_Salinas_ticahuanca\\NegocioPDF\\NegocioPDF.csproj",
         "packagesPath": "C:\\Users\\mario\\.nuget\\packages\\",
-        "outputPath": "D:\\C#\\PRUEBA\\NegocioPDF\\obj\\",
+        "outputPath": "D:\\CALIDAD SOFTWARE\\proyecto-si784-2024-ii-u1-FloresR_Salinas_ticahuanca\\NegocioPDF\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\mario\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -79,14 +79,14 @@
         }
       }
     },
-    "D:\\C#\\PRUEBA\\PROYECTOPDF\\PROYECTOPDF.csproj": {
+    "D:\\CALIDAD SOFTWARE\\proyecto-si784-2024-ii-u1-FloresR_Salinas_ticahuanca\\PROYECTOPDF\\PROYECTOPDF.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\C#\\PRUEBA\\PROYECTOPDF\\PROYECTOPDF.csproj",
+        "projectUniqueName": "D:\\CALIDAD SOFTWARE\\proyecto-si784-2024-ii-u1-FloresR_Salinas_ticahuanca\\PROYECTOPDF\\PROYECTOPDF.csproj",
         "projectName": "PROYECTOPDF",
-        "projectPath": "D:\\C#\\PRUEBA\\PROYECTOPDF\\PROYECTOPDF.csproj",
+        "projectPath": "D:\\CALIDAD SOFTWARE\\proyecto-si784-2024-ii-u1-FloresR_Salinas_ticahuanca\\PROYECTOPDF\\PROYECTOPDF.csproj",
         "packagesPath": "C:\\Users\\mario\\.nuget\\packages\\",
-        "outputPath": "D:\\C#\\PRUEBA\\PROYECTOPDF\\obj\\",
+        "outputPath": "D:\\CALIDAD SOFTWARE\\proyecto-si784-2024-ii-u1-FloresR_Salinas_ticahuanca\\PROYECTOPDF\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\mario\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -104,8 +104,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\C#\\PRUEBA\\NegocioPDF\\NegocioPDF.csproj": {
-                "projectPath": "D:\\C#\\PRUEBA\\NegocioPDF\\NegocioPDF.csproj"
+              "D:\\CALIDAD SOFTWARE\\proyecto-si784-2024-ii-u1-FloresR_Salinas_ticahuanca\\NegocioPDF\\NegocioPDF.csproj": {
+                "projectPath": "D:\\CALIDAD SOFTWARE\\proyecto-si784-2024-ii-u1-FloresR_Salinas_ticahuanca\\NegocioPDF\\NegocioPDF.csproj"
               }
             }
           }

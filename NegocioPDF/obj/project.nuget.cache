@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "jtrmW6hBEoI=",
+  "dgSpecHash": "TGilumtNA1Y=",
   "success": true,
-  "projectFilePath": "D:\\C#\\PRUEBA\\NegocioPDF\\NegocioPDF.csproj",
+  "projectFilePath": "D:\\CALIDAD SOFTWARE\\proyecto-si784-2024-ii-u1-FloresR_Salinas_ticahuanca\\NegocioPDF\\NegocioPDF.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mario\\.nuget\\packages\\bouncycastle.cryptography\\2.3.1\\bouncycastle.cryptography.2.3.1.nupkg.sha512",
     "C:\\Users\\mario\\.nuget\\packages\\dapper\\2.1.35\\dapper.2.1.35.nupkg.sha512",
