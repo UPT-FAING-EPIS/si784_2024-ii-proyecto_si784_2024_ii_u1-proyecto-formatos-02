@@ -1682,7 +1682,7 @@
     "version": "1.0.0",
     "restore": {
       "projectUniqueName": "D:\\CALIDAD SOFTWARE\\proyecto-si784-2024-ii-u1-FloresR_Salinas_ticahuanca\\NegocioPDF\\NegocioPDF.csproj",
-      "projectName": "NegocioPDF",
+      "projectName": "PDFOperationsF",
       "projectPath": "D:\\CALIDAD SOFTWARE\\proyecto-si784-2024-ii-u1-FloresR_Salinas_ticahuanca\\NegocioPDF\\NegocioPDF.csproj",
       "packagesPath": "C:\\Users\\mario\\.nuget\\packages\\",
       "outputPath": "D:\\CALIDAD SOFTWARE\\proyecto-si784-2024-ii-u1-FloresR_Salinas_ticahuanca\\NegocioPDF\\obj\\",

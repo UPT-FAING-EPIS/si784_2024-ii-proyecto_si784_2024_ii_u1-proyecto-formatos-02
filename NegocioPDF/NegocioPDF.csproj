@@ -4,6 +4,14 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <!-- Configuración para NuGet -->
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>PDFOperationsF</PackageId> <!-- Cambia este ID por el nombre que deseas para tu paquete -->
+    <Version>1.0.0</Version> <!-- La versión que desees para el paquete -->
+    <Authors>Mario</Authors>
+    <Company>DevSolutions</Company> <!-- Puedes personalizarlo o dejarlo vacío -->
+    <Description>Proyecto que permite realizar operaciones de fusión y corte de PDF utilizando .NET Core 8.0.</Description>
+    <PackageTags>pdf;fusionar;cortar;dapper</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
