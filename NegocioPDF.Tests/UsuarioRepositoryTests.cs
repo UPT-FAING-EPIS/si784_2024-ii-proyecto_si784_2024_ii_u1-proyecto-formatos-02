@@ -51,8 +51,8 @@ namespace NegocioPDF.Tests
 
             // Assert: Verificar que el usuario fue agregado a la base de datos
             var usuarios = _usuarioRepository.ObtenerUsuarios();
-            Assert.AreEqual(1, usuarios.Count()); // Verificar que hay exactamente un usuario registrado
-            Assert.AreEqual("Mario", usuarios.First().Nombre); // Verificar que el nombre del usuario es el esperado
+            Assert.That(usuarios.Count(), Is.EqualTo(1)); // Verificar que hay exactamente un usuario registrado
+            Assert.That(usuarios.First().Nombre, Is.EqualTo("Mario")); // Verificar que el nombre del usuario es el esperado
         }
 
         // Prueba para verificar que se lanza una excepción si se intenta registrar un usuario con un correo ya existente
